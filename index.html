@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>João Henrique Campagnolo - Portfolio</title>
+  <meta name="description" content="Portfolio of João Henrique Campagnolo, Neuroscience Researcher and Machine Learning Enthusiast.">
+  <meta name="keywords" content="João Campagnolo, Neuroscience, Machine Learning, Portfolio, Researcher">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Using Montserrat font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Landing Page -->
+  <section id="landing">
+    <!-- Logo and Menu Icon -->
+    <div class="header">
+      <div class="logo">
+        <!-- Placeholder for logo -->
+        <img src="images/logo.png" alt="Logo">
+      </div>
+      <div class="menu-icon">
+        <!-- Menu icon that scrolls to content -->
+        <a href="#" onclick="scrollToContent()">
+          <img src="images/menu-icon.png" alt="Menu">
+        </a>
+      </div>
+    </div>
+    <div class="landing-content">
+      <h1>João Henrique Campagnolo</h1>
+      <p class="tagline">Researcher in Neuroscience | M.Sc. in Biomedical Engineering</p>
+      <!-- Placeholder for your graphic or avatar -->
+      <img src="images/your-photo.jpg" alt="João Henrique Campagnolo">
+    </div>
+  </section>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="logo">
+        <h2>Contents</h2>
+      </div>
+      <nav>
+        <ul id="nav-list">
+          <li><a href="#about">About Me</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#interests">Interests</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+      <!-- About Section -->
+      <section id="about">
+        <h2>About Me</h2>
+        <p>
+          Hi, I’m João Henrique Campagnolo, a Neuroscientist and Bioengineer based in Copenhagen. I’m currently pursuing a PhD in Neuroscience, exploring the neural mechanisms underlying stress resilience using zebrafish as a model. My work combines techniques in whole-brain imaging, behavioral analysis, and ML to uncover insights into stress-related disorders like anxiety and depression.
+        </p>
+        <p>
+          Beyond academia, I enjoy learning about, and working with tools that bridge neuroscience and ML. When I’m not diving into research, I enjoy playing sports (namely tennis and football), and experimenting with whacky projects, like PillProphet (which leverages AI to predict drug trial outcomes), or rating kebabs across Europe...
+        </p>
+      </section>
+
+      <!-- Education Section -->
+      <section id="education">
+        <h2>Education</h2>
+        <ul>
+          <li>
+            <strong>PhD in Neuroscience</strong> (2022–Present)<br>
+            <em>University of Copenhagen</em><br>
+            Project: Neural Correlates of Stress Resilience in Zebrafish Larvae
+          </li>
+          <li>
+            <strong>Integrated Masters in Biomedical Engineering and Biophysics</strong> (2014–2020)<br>
+            <em>University of Lisbon, Faculdade de Ciências</em><br>
+            Major: Medical Biophysics and Systems Physiology<br>
+            Graduated with an average grade of 17/20<br>
+            Awards: Prémio de Mérito Académico (highest grade record) in Years 1 and 2<br>
+            Master’s Thesis: Unsupervised behavioral classification with 3D pose data from tethered Drosophila Melanogaster, conducted at <em>École Polytechnique Fédérale de Lausanne (EPFL)</em> under Prof. Pavan Ramdya<br>
+            Research Publication: Co-authored "DeepFly3D: A deep learning-based approach for 3D limb and appendage tracking in tethered, adult Drosophila," published in <em>eLife</em>. <a href="https://elifesciences.org/articles/48571" target="_blank">View on eLife</a>
+          </li>
+          <li>
+            <strong>PACES, Year 1</strong> (2013-2014)<br>
+            <em>Université Bordeaux Ségalen</em>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Experience Section -->
+      <section id="experience">
+        <h2>Professional Experience</h2>
+        <ul>
+          <li>
+            <strong>Data Scientist/Developer, Nevaro</strong> (2020–2022)<br>
+            <em>Lisbon, Portugal</em><br>
+            Nevaro focuses on digital solutions for mental health, wellbeing, and performance using physiological biomarkers and gamification. I integrated data from digital biomarkers (e.g., Muse, CardioGram) to develop unsupervised behavioral classifications for clinical patient management.
+          </li>
+          <li>
+            <strong>Master Project Researcher, Ramdya Lab</strong> (2018–2019)<br>
+            <em>École Polytechnique Fédérale de Lausanne (EPFL)</em><br>
+            Developed a modular pipeline in Python to classify fruit fly behaviors from 3D pose data, leading to a co-authored publication in eLife. This project laid the groundwork for my expertise in behavioral classification and time-series analysis.
+          </li>
+          <li>
+            <strong>Intern Developer/Tester, Emotai</strong> (Summer 2017)<br>
+            <em>Faculdade de Ciências, Universidade de Lisboa (FCUL)</em><br>
+            Created a deep neural network to classify human emotional states based on EEG data, focusing on supervised learning for emotion recognition.
+          </li>
+        </ul>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+          <div class="project">
+            <a href="https://github.com/JoaoCampagnolo/PillProphet" target="_blank">
+              <img src="images/pillprophet-thumbnail.jpg" alt="PillProphet">
+              <div class="project-overlay">
+                <h3>PillProphet</h3>
+                <p>AI for drug trial predictions.</p>
+              </div>
+            </a>
+          </div>
+          <div class="project">
+            <a href="https://github.com/JoaoCampagnolo/CompNeuroXX24" target="_blank">
+              <img src="images/compneuro-thumbnail.jpg" alt="Computational Neuroscience">
+              <div class="project-overlay">
+                <h3>CompNeuroXX24</h3>
+                <p>Computational Neuroscience course for KU MSc. students (Spring 2024).</p>
+              </div>
+            </a>
+          </div>
+          <!-- Add more projects as needed -->
+          <div class="project">
+            <a href="https://github.com/JoaoCampagnolo/CompNeuroXX24" target="_blank">
+              <img src="images/compneuro-thumbnail.jpg" alt="Computational Neuroscience">
+              <div class="project-overlay">
+                <h3>CompNeuroXX24</h3>
+                <p>Master's course repository.</p>
+              </div>
+            </a>
+          </div>
+          <div class="project">
+            <a href="https://github.com/JoaoCampagnolo/CompNeuroXX24" target="_blank">
+              <img src="images/compneuro-thumbnail.jpg" alt="Computational Neuroscience">
+              <div class="project-overlay">
+                <h3>CompNeuroXX24</h3>
+                <p>Master's course repository.</p>
+              </div>
+            </a>
+          </div>
+          <div class="project">
+            <a href="https://github.com/JoaoCampagnolo/CompNeuroXX24" target="_blank">
+              <img src="images/compneuro-thumbnail.jpg" alt="Computational Neuroscience">
+              <div class="project-overlay">
+                <h3>CompNeuroXX24</h3>
+                <p>Master's course repository.</p>
+              </div>
+            </a>
+          </div>
+          <div class="project">
+            <a href="https://github.com/JoaoCampagnolo/CompNeuroXX24" target="_blank">
+              <img src="images/compneuro-thumbnail.jpg" alt="Computational Neuroscience">
+              <div class="project-overlay">
+                <h3>CompNeuroXX24</h3>
+                <p>Master's course repository.</p>
+              </div>
+            </a>
+          </div>          
+
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section id="skills">
+        <h2>Skills</h2>
+        <!-- Skills list here -->
+      </section>
+
+      <!-- Interests Section -->
+      <section id="interests">
+        <h2>Interests & Activities</h2>
+        <!-- Interests list here -->
+      </section>
+
+      <!-- Testimonials Section -->
+      <section id="testimonials">
+        <h2>Testimonials</h2>
+        <!-- Testimonials here -->
+      </section>
+
+      <!-- Blog Section -->
+      <section id="blog">
+        <h2>Blog</h2>
+        <!-- Blog articles here -->
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact">
+        <h2>Contact</h2>
+        <!-- Contact form here -->
+      </section>
+    </main>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Scroll to Content Function
+    function scrollToContent() {
+      document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Show Sidebar After Scrolling Past Landing Page
+    window.addEventListener('scroll', () => {
+      const sidebar = document.getElementById('sidebar');
+      const landingHeight = document.getElementById('landing').offsetHeight;
+
+      if (window.pageYOffset >= landingHeight) {
+        sidebar.classList.add('visible');
+      } else {
+        sidebar.classList.remove('visible');
+      }
+
+      // Highlight Active Section in Sidebar
+      const sections = document.querySelectorAll('main section');
+      const navLi = document.querySelectorAll('.sidebar nav ul li');
+
+      let current = '';
+
+      for (let section of sections) {
+        const rect = section.getBoundingClientRect();
+        const sectionTop = rect.top;
+        const sectionHeight = rect.height;
+
+        if (sectionTop <= 60 && sectionTop + sectionHeight > 60) {
+          current = section.getAttribute('id');
+          break; // Found the section at the top; exit the loop
+        }
+      }
+
+      // Remove 'active' class from all links
+      navLi.forEach(li => {
+        li.classList.remove('active');
+      });
+
+      // Add 'active' class to the link corresponding to the current section
+      navLi.forEach(li => {
+        if (li.querySelector('a').getAttribute('href') === '#' + current) {
+          li.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
