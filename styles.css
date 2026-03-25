@@ -27,6 +27,7 @@ body {
   color: var(--text);
   font-family: "Inter", sans-serif;
   line-height: 1.5;
+  overflow-x: hidden;
 }
 
 img {
@@ -40,7 +41,7 @@ a {
 }
 
 .container {
-  width: min(calc(100% - 2rem), var(--max-width));
+  width: min(calc(100% - 4rem), var(--max-width));
   margin: 0 auto;
 }
 
@@ -92,8 +93,8 @@ a {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.3fr 0.9fr;
-  gap: 2rem;
+  grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.9fr);
+  gap: 3rem;
   align-items: end;
 }
 
@@ -115,8 +116,9 @@ a {
 }
 
 .hero h1 {
-  max-width: 10ch;
-  font-size: clamp(3.4rem, 8vw, 7.8rem);
+  max-width: 11ch;
+  font-size: clamp(3.2rem, 8vw, 7.1rem);
+  text-wrap: balance;
 }
 
 .hero-text {
@@ -216,18 +218,18 @@ a {
 
 .project-card {
   display: block;
-  min-height: 280px;
+  min-height: 250px;
   padding: 1.4rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: linear-gradient(to bottom, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
   transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
 }
 
 .project-card:hover {
   transform: translateY(-4px);
   border-color: rgba(183, 255, 93, 0.45);
-  background: linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
 }
 
 .project-meta {
@@ -317,6 +319,10 @@ a {
 }
 
 @media (max-width: 900px) {
+  .container {
+    width: min(calc(100% - 2rem), var(--max-width));
+  }
+
   .hero-grid,
   .project-grid,
   .split,
@@ -340,5 +346,10 @@ a {
 
   .hero h1 {
     max-width: 12ch;
+    font-size: clamp(2.8rem, 12vw, 5.6rem);
+  }
+
+  .hero-panel {
+    justify-content: flex-start;
   }
 }
