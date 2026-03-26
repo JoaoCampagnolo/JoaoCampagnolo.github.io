@@ -16,7 +16,7 @@
 
   var img = new Image();
   img.crossOrigin = 'anonymous';
-  img.src = 'images/portrait_xx25_no_bg_cropped.jpg';
+  img.src = 'images/portrait_xx25_no_bg_cropped_e.jpg';
 
   img.onload = function () {
     // Set canvas resolution to a workable size
