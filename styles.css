@@ -61,10 +61,49 @@ a {
   min-height: 76px;
 }
 
+.brand-block {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .brand {
   font-weight: 700;
   letter-spacing: -0.03em;
   font-size: 1.1rem;
+}
+
+.brand-links {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.icon-link {
+  width: 2.2rem;
+  height: 2.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: var(--muted);
+  transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.icon-link:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.03);
+  transform: translateY(-1px);
+}
+
+.icon-link svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .nav {
@@ -300,29 +339,167 @@ a {
   background: var(--panel);
 }
 
+/* Publications */
+.pub-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.pub-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  padding: 1.4rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.pub-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 5.5rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #0b0b0c;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.pub-badge--prep {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.pub-details h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.pub-authors {
+  margin: 0 0 0.2rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.pub-venue {
+  margin: 0 0 0.6rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.pub-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pub-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.pub-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Prose links */
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  transition: color 0.2s ease;
+}
+
+.prose a:hover {
+  color: var(--text);
+}
+
+/* Footer */
 .site-footer {
-  padding: 7rem 0 5rem;
+  padding: 4rem 0 3rem;
   border-top: 1px solid var(--line);
 }
 
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+.footer-compact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-.footer-links {
-  display: grid;
-  gap: 1rem;
-  align-content: start;
+.footer-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
 }
 
-.footer-links a {
+.footer-icon-link {
+  width: 2.8rem;
+  height: 2.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
   color: var(--muted);
-  font-size: 1.15rem;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
-.footer-links a:hover {
+.footer-icon-link:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
+}
+
+.footer-icon-link svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--line);
+  margin-bottom: 1.5rem;
+}
+
+.footer-copy {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.footer-copy a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.footer-copy a:hover {
   color: var(--text);
 }
 
@@ -333,8 +510,11 @@ a {
 
   .hero-grid,
   .project-grid,
-  .split,
-  .footer-grid {
+  .split {
+    grid-template-columns: 1fr;
+  }
+
+  .pub-item {
     grid-template-columns: 1fr;
   }
 

@@ -20,13 +20,43 @@
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#top">João Campagnolo</a>
+      <div class="brand-block">
+        <a class="brand" href="#top">João Campagnolo</a>
+        <div class="brand-links" aria-label="Contact links">
+          <a class="icon-link" href="mailto:jhc2309@gmail.com" aria-label="Email" title="Email">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+              <path d="M4 7l8 6 8-6"></path>
+            </svg>
+          </a>
+          <a class="icon-link" href="https://github.com/JoaoCampagnolo" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 6v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6.2a4.8 4.8 0 0 0-1.3-3.3 4.5 4.5 0 0 0-.1-3.2s-1.1-.3-3.6 1.3a12.3 12.3 0 0 0-6.2 0C6.3 3.5 5.2 3.8 5.2 3.8a4.5 4.5 0 0 0-.1 3.2A4.8 4.8 0 0 0 3.8 10c0 4.8 2.7 5.9 5.5 6.2-.6.6-.6 1.2-.6 2V22"></path>
+            </svg>
+          </a>
+          <a class="icon-link" href="https://www.linkedin.com/in/joao-campagnolo/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V9h4v2"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+          <a class="icon-link" href="https://orcid.org/0000-0001-9748-5988" target="_blank" rel="noopener" aria-label="ORCID" title="ORCID">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M8 7v0"></path>
+              <path d="M8 10v7"></path>
+              <path d="M12 10h2a3.5 3.5 0 0 1 0 7h-2V10z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
 
       <nav class="nav">
         <a href="#work">Work</a>
+        <a href="#publications">Publications</a>
         <a href="#about">About</a>
         <a href="#elsewhere">Elsewhere</a>
-        <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
@@ -158,7 +188,48 @@
       </div>
     </section>
 
-    <section class="section section--alt" id="about">
+    <section class="section section--alt" id="publications">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Selected publications</p>
+          <h2>Papers and manuscripts.</h2>
+        </div>
+
+        <div class="pub-list">
+          <div class="pub-item">
+            <span class="pub-badge">eLife</span>
+            <div class="pub-details">
+              <h3>DeepFly3D, a deep learning-based approach for 3D limb and appendage tracking in tethered, adult Drosophila</h3>
+              <p class="pub-authors">S. G&uuml;nel, H. Rhodin, D. Morales, <strong>J.H. Campagnolo</strong>, P. Ramdya, P. Fua</p>
+              <p class="pub-venue"><em>eLife</em>, 2019</p>
+              <div class="pub-links">
+                <a class="pub-link" href="https://elifesciences.org/articles/48571" target="_blank" rel="noopener">HTML</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="pub-item">
+            <span class="pub-badge pub-badge--prep">In prep</span>
+            <div class="pub-details">
+              <h3>Quantifying Stress Resilience as Locomotor Rebound in Larval Zebrafish</h3>
+              <p class="pub-authors"><strong>J.H. Campagnolo</strong>, E. Ahmad, R. Selvan, F. Kermen</p>
+              <p class="pub-venue">Manuscript in preparation</p>
+            </div>
+          </div>
+
+          <div class="pub-item">
+            <span class="pub-badge pub-badge--prep">In prep</span>
+            <div class="pub-details">
+              <h3>Neural correlates of interindividual variability in rebound from acute stress in the zebrafish</h3>
+              <p class="pub-authors"><strong>J.H. Campagnolo</strong>, L.P. Rigola, J.L. Korn, R. Selvan, F. Kermen</p>
+              <p class="pub-venue">Manuscript in preparation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
       <div class="container split">
         <div>
           <p class="eyebrow">Background</p>
@@ -167,17 +238,28 @@
 
         <div class="prose">
           <p>
-            I completed a PhD in Neuroscience at the University of Copenhagen
-            after training in Biomedical Engineering and Biophysics. My work has
-            involved experimental design, behavioral analysis, whole-brain
-            imaging, machine learning, multivariate statistics, and scientific
-            programming in Python.
+            I am a neuroscientist with a background in
+            <a href="https://www.ulisboa.pt/" target="_blank" rel="noopener">Biomedical Engineering and Biophysics</a>.
+            I completed my PhD in Neuroscience at the
+            <a href="https://www.ku.dk/en" target="_blank" rel="noopener">University of Copenhagen</a>,
+            where I worked in
+            <a href="https://in.ku.dk/research/kermen-lab/" target="_blank" rel="noopener">Florence Kermen's lab</a>
+            on the neural correlates of stress resilience in larval zebrafish. My doctoral work combined behavioral assays,
+            whole-brain activity mapping, multivariate statistics, and scientific programming to study how brains recover from acute stress.
           </p>
           <p>
-            I am especially interested in projects that combine rigorous methods
-            with useful computational tools — whether in neuroscience, biomedical
-            data, or independent side projects that start as curiosity and become
-            unexpectedly serious.
+            Before that, I carried out my master's thesis at
+            <a href="https://www.epfl.ch/en/" target="_blank" rel="noopener">EPFL</a>
+            in
+            <a href="https://www.epfl.ch/labs/ramdya-lab/" target="_blank" rel="noopener">Pavan Ramdya's lab</a>,
+            where I worked on unsupervised quantification of behavior in <em>Drosophila melanogaster</em>.
+            Across these research settings, I have moved between experiment and computation:
+            behavior quantification, imaging data, machine learning, statistical analysis, and building tools that make scientific questions easier to handle.
+          </p>
+          <p>
+            I am particularly interested in computational and systems neuroscience, active inference, and machine learning methods applied to biological and biomedical data.
+            I also enjoy independent projects that sit slightly outside my formal research path &mdash; from clinical-trial NLP work such as PillProphet
+            to smaller side projects that are somewhere between useful, curious, and unnecessarily committed.
           </p>
         </div>
       </div>
@@ -201,18 +283,38 @@
     </section>
   </main>
 
-  <footer class="site-footer" id="contact">
-    <div class="container footer-grid">
-      <div>
-        <p class="eyebrow">Contact</p>
-        <h2>Let’s keep it simple.</h2>
+  <footer class="site-footer">
+    <div class="container footer-compact">
+      <div class="footer-icons" aria-label="Contact links">
+        <a class="footer-icon-link" href="mailto:jhc2309@gmail.com" aria-label="Email" title="Email">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+            <path d="M4 7l8 6 8-6"></path>
+          </svg>
+        </a>
+        <a class="footer-icon-link" href="https://github.com/JoaoCampagnolo" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 6v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6.2a4.8 4.8 0 0 0-1.3-3.3 4.5 4.5 0 0 0-.1-3.2s-1.1-.3-3.6 1.3a12.3 12.3 0 0 0-6.2 0C6.3 3.5 5.2 3.8 5.2 3.8a4.5 4.5 0 0 0-.1 3.2A4.8 4.8 0 0 0 3.8 10c0 4.8 2.7 5.9 5.5 6.2-.6.6-.6 1.2-.6 2V22"></path>
+          </svg>
+        </a>
+        <a class="footer-icon-link" href="https://www.linkedin.com/in/joao-campagnolo/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V9h4v2"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+        </a>
+        <a class="footer-icon-link" href="https://orcid.org/0000-0001-9748-5988" target="_blank" rel="noopener" aria-label="ORCID" title="ORCID">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M8 7v0"></path>
+            <path d="M8 10v7"></path>
+            <path d="M12 10h2a3.5 3.5 0 0 1 0 7h-2V10z"></path>
+          </svg>
+        </a>
       </div>
-
-      <div class="footer-links">
-        <a href="mailto:jhc2309@gmail.com">jhc2309@gmail.com</a>
-        <a href="https://github.com/JoaoCampagnolo" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
+      <div class="footer-divider"></div>
+      <p class="footer-copy">&copy; 2026 Jo&atilde;o Campagnolo. Built with plain HTML, CSS, and JS. Hosted on <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>.</p>
     </div>
   </footer>
 </body>
