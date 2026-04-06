@@ -338,7 +338,7 @@ a {
   border-radius: 999px;
   color: var(--muted);
   background: var(--panel);
-  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
 .tag-link:hover {
@@ -348,8 +348,14 @@ a {
 }
 
 .tag-link--accent {
-  border-color: rgba(183, 255, 93, 0.3);
-  color: var(--accent);
+  background: var(--accent);
+  color: #0b0b0c;
+  border-color: transparent;
+}
+
+.tag-link--accent:hover {
+  background: #c8ff7e;
+  color: #0b0b0c;
 }
 
 /* Publications */
