@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jitterpedia — Energy Drink Ratings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .jp-hero { padding: 8rem 0 3rem; border-bottom: 1px solid var(--line); }
+    .jp-hero h1 { margin: 0 0 0.5rem; font-size: clamp(2.4rem, 5vw, 3.6rem); letter-spacing: -0.04em; }
+    .jp-hero .subtitle { color: var(--muted); font-size: 1.1rem; margin: 0 0 1.5rem; }
+
+    .jp-stats { display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 0; }
+    .jp-stat { text-align: center; }
+    .jp-stat .num { display: block; font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+    .jp-stat .lbl { font-size: 0.78rem; color: var(--muted); font-family: "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    .jp-body { padding: 3rem 0 5rem; }
+
+    /* Filters */
+    .jp-filters { margin-bottom: 2rem; }
+    .jp-filters-label { font-family: "IBM Plex Mono", monospace; font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.6rem; }
+    .jp-filter-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .jp-filter-btn {
+      padding: 0.35rem 0.7rem; border: 1px solid var(--line); border-radius: 999px;
+      background: transparent; color: var(--muted); font-size: 0.82rem; font-family: "Inter", sans-serif;
+      cursor: pointer; transition: all 0.15s ease;
+    }
+    .jp-filter-btn:hover { border-color: var(--accent); color: var(--text); }
+    .jp-filter-btn.active { background: var(--accent); color: #0b0b0c; border-color: transparent; }
+
+    /* Chart */
+    .jp-chart-wrap { position: relative; }
+    .jp-bar-row {
+      display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.45rem;
+      cursor: pointer; transition: opacity 0.15s ease;
+    }
+    .jp-bar-row:hover { opacity: 0.85; }
+    .jp-bar-name { width: 220px; min-width: 220px; text-align: right; font-size: 0.88rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .jp-bar-track { flex: 1; height: 28px; background: var(--panel); border-radius: 4px; position: relative; overflow: hidden; }
+    .jp-bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s cubic-bezier(0.22,1,0.36,1); display: flex; align-items: center; padding-left: 8px; }
+    .jp-bar-score { font-size: 0.78rem; font-weight: 600; color: #0b0b0c; white-space: nowrap; }
+    .jp-bar-count { width: 50px; min-width: 50px; font-size: 0.75rem; color: var(--muted); font-family: "IBM Plex Mono", monospace; }
+
+    /* Detail panel */
+    .jp-detail {
+      margin-top: 1.5rem; padding: 1.2rem; border: 1px solid var(--line); border-radius: var(--radius);
+      background: var(--panel); display: none;
+    }
+    .jp-detail.show { display: block; }
+    .jp-detail h3 { margin: 0 0 0.8rem; font-size: 1.2rem; }
+    .jp-detail-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.5rem; }
+    .jp-detail-item { display: flex; justify-content: space-between; padding: 0.4rem 0.6rem; border-radius: 6px; background: rgba(255,255,255,0.03); }
+    .jp-detail-rater { color: var(--muted); font-size: 0.9rem; }
+    .jp-detail-rating { font-weight: 600; color: var(--accent); font-size: 0.9rem; }
+
+    /* Add rating form */
+    .jp-add { margin-top: 3rem; padding: 1.4rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+    .jp-add h3 { margin: 0 0 1rem; font-size: 1.1rem; }
+    .jp-add-form { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: flex-end; }
+    .jp-field { display: flex; flex-direction: column; gap: 0.3rem; }
+    .jp-field label { font-size: 0.75rem; color: var(--muted); font-family: "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: 0.06em; }
+    .jp-field input {
+      padding: 0.5rem 0.7rem; border: 1px solid var(--line); border-radius: 8px;
+      background: rgba(255,255,255,0.04); color: var(--text); font-size: 0.9rem; font-family: "Inter", sans-serif;
+    }
+    .jp-field input:focus { outline: none; border-color: var(--accent); }
+    .jp-submit {
+      padding: 0.55rem 1.2rem; border: none; border-radius: 999px;
+      background: var(--accent); color: #0b0b0c; font-weight: 600; font-size: 0.88rem;
+      cursor: pointer; transition: transform 0.15s ease;
+    }
+    .jp-submit:hover { transform: translateY(-1px); }
+
+    .jp-export { margin-top: 1rem; }
+    .jp-export-btn {
+      padding: 0.4rem 0.9rem; border: 1px solid var(--line); border-radius: 999px;
+      background: transparent; color: var(--muted); font-size: 0.82rem; font-family: "Inter", sans-serif;
+      cursor: pointer; transition: all 0.15s ease;
+    }
+    .jp-export-btn:hover { border-color: var(--accent); color: var(--text); }
+
+    .jp-toast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
+      padding: 0.7rem 1.4rem; border-radius: 999px; background: var(--accent); color: #0b0b0c;
+      font-weight: 600; font-size: 0.9rem; opacity: 0; transition: all 0.3s ease; z-index: 100;
+    }
+    .jp-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.9rem; transition: color 0.2s ease; }
+    .back-link:hover { color: var(--text); }
+
+    @media (max-width: 900px) {
+      .jp-hero { padding: 6rem 0 2rem; }
+      .jp-bar-name { width: 120px; min-width: 120px; font-size: 0.78rem; }
+      .jp-add-form { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="back-link" href="../index.html">&larr; Back to home</a>
+      <nav class="nav">
+        <a href="../index.html#work">Work</a>
+        <a href="../index.html#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="jp-hero">
+      <div class="container">
+        <p class="eyebrow">Side project</p>
+        <h1>Jitterpedia ⚡</h1>
+        <p class="subtitle">A collaborative energy drink rating database. Part product idea, part database exercise, part highly committed joke.</p>
+        <div class="jp-stats">
+          <div class="jp-stat"><span class="num" id="stat-drinks">0</span><span class="lbl">Drinks</span></div>
+          <div class="jp-stat"><span class="num" id="stat-tastings">0</span><span class="lbl">Tastings</span></div>
+          <div class="jp-stat"><span class="num" id="stat-raters">0</span><span class="lbl">Raters</span></div>
+          <div class="jp-stat"><span class="num" id="stat-avg">0</span><span class="lbl">Avg Rating</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="jp-body">
+      <div class="container">
+        <div class="jp-filters">
+          <p class="jp-filters-label">Filter by rater</p>
+          <div class="jp-filter-row" id="rater-filters"></div>
+        </div>
+
+        <div class="jp-chart-wrap" id="chart"></div>
+        <div class="jp-detail" id="detail">
+          <h3 id="detail-title"></h3>
+          <div class="jp-detail-grid" id="detail-grid"></div>
+        </div>
+
+        <div class="jp-add">
+          <h3>Add a rating</h3>
+          <div class="jp-add-form">
+            <div class="jp-field">
+              <label for="add-drink">Drink</label>
+              <input type="text" id="add-drink" placeholder="e.g. Monster Ultra" list="drink-list" />
+              <datalist id="drink-list"></datalist>
+            </div>
+            <div class="jp-field">
+              <label for="add-rater">Rater</label>
+              <input type="text" id="add-rater" placeholder="Your name" list="rater-list" />
+              <datalist id="rater-list"></datalist>
+            </div>
+            <div class="jp-field">
+              <label for="add-rating">Rating (0-5)</label>
+              <input type="number" id="add-rating" min="0" max="5" step="0.1" placeholder="3.5" />
+            </div>
+            <button class="jp-submit" id="add-btn">Add</button>
+          </div>
+        </div>
+
+        <div class="jp-export">
+          <button class="jp-export-btn" id="export-btn">Export CSV</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-compact">
+      <div class="footer-divider"></div>
+      <p class="footer-copy">&copy; 2026 Jo&atilde;o Campagnolo</p>
+    </div>
+  </footer>
+
+  <div class="jp-toast" id="toast"></div>
+
+  <script>
+  (function () {
+    // ── Embedded tasting data ──
+    var DATA = [
+      {drink:"Squid game drink",rater:"Zoltan",rating:3.0,date:"2025-05-09"},
+      {drink:"Squid game drink",rater:"Vicky",rating:4.0,date:"2025-05-09"},
+      {drink:"Squid game drink",rater:"Alessio",rating:4.0,date:"2025-05-09"},
+      {drink:"Squid game drink",rater:"João",rating:4.0,date:"2025-05-09"},
+      {drink:"Squid game drink",rater:"Jorun",rating:3.8,date:"2025-05-09"},
+      {drink:"Squid game drink",rater:"Klara",rating:3.5,date:"2025-05-09"},
+      {drink:"Strawberry energy drink",rater:"Jorun",rating:3.0,date:"2025-05-12"},
+      {drink:"Strawberry energy drink",rater:"João",rating:3.8,date:"2025-05-12"},
+      {drink:"Strawberry energy drink",rater:"Klara",rating:2.5,date:"2025-05-12"},
+      {drink:"Strawberry energy drink",rater:"Alessio",rating:3.5,date:"2025-05-12"},
+      {drink:"Cult",rater:"Alessio",rating:2.0,date:"2025-05-14"},
+      {drink:"Cult",rater:"Jorun",rating:2.7,date:"2025-05-14"},
+      {drink:"Cult",rater:"Fede",rating:3.0,date:"2025-05-14"},
+      {drink:"Cult",rater:"Ninon",rating:3.0,date:"2025-05-14"},
+      {drink:"Cult",rater:"João",rating:2.5,date:"2025-05-14"},
+      {drink:"Cult",rater:"Klara",rating:1.0,date:"2025-05-14"},
+      {drink:"X ray",rater:"Alessio",rating:3.5,date:""},
+      {drink:"X ray",rater:"Simo",rating:3.5,date:""},
+      {drink:"X ray",rater:"Vicky",rating:4.2,date:""},
+      {drink:"X ray",rater:"João",rating:3.0,date:""},
+      {drink:"Power king",rater:"Alessio",rating:2.0,date:""},
+      {drink:"Power king",rater:"Klara",rating:1.5,date:""},
+      {drink:"Power king",rater:"Jorun",rating:3.3,date:""},
+      {drink:"Power king",rater:"João",rating:2.9,date:""},
+      {drink:"Power king",rater:"Vicky",rating:2.0,date:""},
+      {drink:"Power king",rater:"Zoltan",rating:3.5,date:""},
+      {drink:"Amper cola",rater:"Alessio",rating:5.0,date:""},
+      {drink:"Amper cola",rater:"Jorun",rating:4.2,date:""},
+      {drink:"Amper cola",rater:"Zoltan",rating:4.0,date:""},
+      {drink:"Amper cola",rater:"João",rating:5.0,date:""},
+      {drink:"Wolverine",rater:"Zoltan",rating:4.0,date:""},
+      {drink:"Wolverine",rater:"Adam",rating:2.5,date:""},
+      {drink:"Wolverine",rater:"João",rating:3.2,date:""},
+      {drink:"Wolverine",rater:"Klara",rating:2.0,date:""},
+      {drink:"Wolverine",rater:"Ninon",rating:2.0,date:""},
+      {drink:"Wolverine",rater:"Jorun",rating:3.7,date:""},
+      {drink:"Wolverine",rater:"Dutch Girl",rating:3.0,date:""},
+      {drink:"Wolverine",rater:"Alessio",rating:1.5,date:""},
+      {drink:"Monster Rio punch",rater:"Alessio",rating:4.0,date:""},
+      {drink:"Monster Rio punch",rater:"Zoltan",rating:1.0,date:""},
+      {drink:"Monster Rio punch",rater:"Ninon",rating:0.3,date:""},
+      {drink:"Monster Rio punch",rater:"João",rating:4.0,date:""},
+      {drink:"Monster Rio punch",rater:"Klara",rating:1.5,date:""},
+      {drink:"Monster Rio punch",rater:"Jorun",rating:2.0,date:""},
+      {drink:"Kong Strong",rater:"Alessio",rating:1.9,date:""},
+      {drink:"Kong Strong",rater:"Jorun",rating:2.0,date:""},
+      {drink:"Kong Strong",rater:"Ninon",rating:2.0,date:""},
+      {drink:"Kong Strong",rater:"Klara",rating:1.0,date:""},
+      {drink:"Kong Strong",rater:"Zoltan",rating:3.0,date:""},
+      {drink:"Kong Strong",rater:"João",rating:2.1,date:""},
+      {drink:"Effect",rater:"Alessio",rating:4.5,date:"2025-06-10"},
+      {drink:"Effect",rater:"Jorun",rating:4.5,date:"2025-06-10"},
+      {drink:"Effect",rater:"Zoltan",rating:3.5,date:"2025-06-10"},
+      {drink:"Effect",rater:"João",rating:3.9,date:"2025-06-10"},
+      {drink:"Effect",rater:"Ninon",rating:4.8,date:"2025-06-10"},
+      {drink:"28 black",rater:"Alessio",rating:4.6,date:"2025-06-11"},
+      {drink:"28 black",rater:"Ninon",rating:4.8,date:"2025-06-11"},
+      {drink:"28 black",rater:"Jorun",rating:4.0,date:"2025-06-11"},
+      {drink:"28 black",rater:"Klara",rating:3.8,date:"2025-06-11"},
+      {drink:"28 black",rater:"Jens Henchman",rating:2.0,date:"2025-06-11"},
+      {drink:"28 black",rater:"João",rating:3.8,date:"2025-06-11"},
+      {drink:"28 black",rater:"Lucia",rating:3.0,date:"2025-06-11"},
+      {drink:"Purple red bull",rater:"Ninon",rating:3.8,date:"2025-06-12"},
+      {drink:"Purple red bull",rater:"Simo",rating:2.5,date:"2025-06-12"},
+      {drink:"Purple red bull",rater:"Victor",rating:3.0,date:"2025-06-12"},
+      {drink:"Purple red bull",rater:"Alessio",rating:4.2,date:"2025-06-12"},
+      {drink:"Purple red bull",rater:"João",rating:3.9,date:"2025-06-12"},
+      {drink:"Purple red bull",rater:"Jorun",rating:3.7,date:"2025-06-12"},
+      {drink:"Purple red bull",rater:"Klara",rating:3.8,date:"2025-06-12"},
+      {drink:"X Ray sugarfree",rater:"João",rating:0.4,date:"2025-06-13"},
+      {drink:"X Ray sugarfree",rater:"Jorun",rating:0.9,date:"2025-06-13"},
+      {drink:"X Ray sugarfree",rater:"Alessio",rating:1.0,date:"2025-06-13"},
+      {drink:"X Ray sugarfree",rater:"Klara",rating:0.5,date:"2025-06-13"},
+      {drink:"X Ray sugarfree",rater:"Ninon",rating:1.5,date:"2025-06-13"},
+      {drink:"X Ray sugarfree",rater:"Zoltan",rating:2.0,date:"2025-06-13"},
+      {drink:"X Ray sugarfree",rater:"Adam",rating:0.5,date:"2025-06-13"},
+      {drink:"Bomba blue",rater:"Adélie",rating:3.0,date:""},
+      {drink:"Bomba blue",rater:"Klara",rating:2.45,date:""},
+      {drink:"Bomba blue",rater:"Alessio",rating:4.5,date:""},
+      {drink:"Bomba blue",rater:"João",rating:4.4,date:""},
+      {drink:"Bomba pink",rater:"Alessio",rating:3.6,date:""},
+      {drink:"Bomba pink",rater:"Zoltan",rating:4.2,date:""},
+      {drink:"Bomba pink",rater:"João",rating:3.8,date:""},
+      {drink:"Bomba pink",rater:"Vicky",rating:3.2,date:""},
+      {drink:"Bomba pink",rater:"Adélie",rating:3.5,date:""},
+      {drink:"Booster blue",rater:"Adélie",rating:3.3,date:""},
+      {drink:"Booster blue",rater:"Vicky",rating:3.1,date:""},
+      {drink:"Booster blue",rater:"Alessio",rating:2.0,date:""},
+      {drink:"Booster blue",rater:"João",rating:3.0,date:""},
+      {drink:"Booster blue",rater:"Dennis",rating:2.0,date:""},
+      {drink:"Booster blue",rater:"Zoltan",rating:3.0,date:""},
+      {drink:"Latitude 65 cactus",rater:"Vicky",rating:3.6,date:""},
+      {drink:"Latitude 65 cactus",rater:"Alessio",rating:4.4,date:""},
+      {drink:"Latitude 65 cactus",rater:"Adélie",rating:3.2,date:""},
+      {drink:"Latitude 65 cactus",rater:"João",rating:3.8,date:""},
+      {drink:"Celcius astro vibe",rater:"Alessio",rating:4.0,date:""},
+      {drink:"Celcius astro vibe",rater:"João",rating:3.9,date:""},
+      {drink:"Celcius astro vibe",rater:"Vicky",rating:4.0,date:""},
+      {drink:"Celcius astro vibe",rater:"Adam",rating:3.5,date:""},
+      {drink:"Celcius astro vibe",rater:"Adélie",rating:2.0,date:""},
+      {drink:"Nailed peach",rater:"Adélie",rating:4.6,date:""},
+      {drink:"Nailed peach",rater:"Alessio",rating:4.9,date:""},
+      {drink:"Nailed peach",rater:"Lucia",rating:4.0,date:""},
+      {drink:"Nailed peach",rater:"João",rating:4.5,date:""},
+      {drink:"Nailed peach",rater:"Jens",rating:4.0,date:""},
+      {drink:"Tokyo ice",rater:"Javi",rating:4.0,date:""},
+      {drink:"Tokyo ice",rater:"Alessio",rating:4.0,date:""},
+      {drink:"Tokyo ice",rater:"João",rating:3.1,date:""},
+      {drink:"Battery pearberry",rater:"Alessio",rating:4.6,date:""},
+      {drink:"Battery pearberry",rater:"João",rating:4.2,date:""},
+      {drink:"Battery pearberry",rater:"Vicky",rating:0.5,date:""},
+      {drink:"Battery pearberry",rater:"Zoltan",rating:1.0,date:""},
+      {drink:"Battery pearberry",rater:"Jens",rating:0.0,date:""},
+      {drink:"One guava",rater:"Niels",rating:3.85,date:""},
+      {drink:"One guava",rater:"João",rating:4.12,date:""},
+      {drink:"One guava",rater:"Alessio",rating:4.0,date:""},
+      {drink:"One guava",rater:"Zoltan",rating:4.1,date:""},
+      {drink:"One guava",rater:"Vicky",rating:4.2,date:""},
+      {drink:"One guava",rater:"Jens",rating:1.25,date:""},
+      {drink:"One guava",rater:"Mika",rating:2.79,date:""},
+      {drink:"Latitude 65",rater:"Jonas",rating:4.0,date:""},
+      {drink:"Latitude 65",rater:"João",rating:4.1,date:""},
+      {drink:"Monster rossi",rater:"João",rating:4.8,date:""},
+      {drink:"Monster rossi",rater:"Vicky",rating:1.3,date:""},
+      {drink:"Monster rossi",rater:"Alessio",rating:4.5,date:""},
+      {drink:"Monster rossi",rater:"Zoltan",rating:4.0,date:""},
+      {drink:"Monster rossi",rater:"Simo",rating:4.0,date:""},
+      {drink:"Monster rossi",rater:"Lasse",rating:3.0,date:""},
+      {drink:"28 black waldmeister",rater:"João",rating:4.9,date:""},
+      {drink:"28 black waldmeister",rater:"Alessio",rating:4.9,date:""},
+      {drink:"28 black waldmeister",rater:"Lasse",rating:4.7,date:""},
+      {drink:"28 black waldmeister",rater:"Zoltan",rating:4.8,date:""},
+      {drink:"Gonergy",rater:"Alessio",rating:4.7,date:""},
+      {drink:"Gonergy",rater:"Jens",rating:4.0,date:""},
+      {drink:"Gonergy",rater:"Zoltan",rating:4.1,date:""},
+      {drink:"Gonergy",rater:"João",rating:4.3,date:""},
+      {drink:"Cult sugar free",rater:"João",rating:2.8,date:""},
+      {drink:"Cult sugar free",rater:"Zoltan",rating:2.5,date:""},
+      {drink:"Cult sugar free",rater:"Alessio",rating:2.2,date:""},
+      {drink:"Cult sugar free",rater:"Vicky",rating:2.5,date:""},
+      {drink:"Effect original",rater:"João",rating:3.8,date:""},
+      {drink:"Effect original",rater:"Zoltan",rating:3.6,date:""},
+      {drink:"Effect original",rater:"Alessio",rating:3.5,date:""},
+      {drink:"28 black sour cherry",rater:"João",rating:4.95,date:""},
+      {drink:"28 black sour cherry",rater:"Alessio",rating:4.95,date:""},
+      {drink:"28 black sour cherry",rater:"Zoltan",rating:4.7,date:""},
+      {drink:"28 black sour cherry",rater:"Simo",rating:4.0,date:""},
+      {drink:"Smag cola zero",rater:"João",rating:4.0,date:""},
+      {drink:"Smag cola zero",rater:"Alessio",rating:0.9,date:""},
+      {drink:"Smag cola zero",rater:"Zoltan",rating:0.6,date:""},
+      {drink:"Latitude 65 smultron",rater:"João",rating:2.8,date:""},
+      {drink:"Latitude 65 smultron",rater:"Alessio",rating:2.2,date:""},
+      {drink:"Latitude 65 smultron",rater:"Zoltan",rating:4.2,date:""},
+      {drink:"Latitude 65 smultron",rater:"X",rating:0.73,date:""},
+      {drink:"Latitude 65 smultron",rater:"Vicky",rating:2.0,date:""},
+      {drink:"Hi mandarin passion",rater:"Vicky",rating:4.7,date:""},
+      {drink:"Hi mandarin passion",rater:"João",rating:4.1,date:""},
+      {drink:"Hi mandarin passion",rater:"Zoltan",rating:3.5,date:""},
+      {drink:"Hi mandarin passion",rater:"Alessio",rating:3.0,date:""},
+      {drink:"Hi Han København",rater:"João",rating:3.7,date:""},
+      {drink:"Hi Han København",rater:"Luisa",rating:3.5,date:""},
+      {drink:"Hi Han København",rater:"Vicky",rating:2.7,date:""},
+      {drink:"Hi Han København",rater:"Zoltan",rating:2.5,date:""},
+      {drink:"Hi Han København",rater:"Alessio",rating:2.1,date:""},
+      {drink:"Hi Han København",rater:"Simo",rating:2.0,date:""},
+      {drink:"State energy",rater:"João",rating:3.8,date:""},
+      {drink:"State energy",rater:"Jens",rating:4.5,date:""},
+      {drink:"State energy",rater:"Zoltan",rating:2.5,date:""},
+      {drink:"State energy",rater:"Alessio",rating:3.5,date:""},
+      {drink:"State energy",rater:"Vicky",rating:4.3,date:""},
+      {drink:"Burn sour twist (Shrek)",rater:"João",rating:4.9,date:""},
+      {drink:"Burn sour twist (Shrek)",rater:"Alessio",rating:4.9,date:""},
+      {drink:"Burn sour twist (Shrek)",rater:"Simo",rating:4.9,date:""},
+      {drink:"Burn sour twist (Shrek)",rater:"Zoltan",rating:4.7,date:""},
+      {drink:"Burn sour twist (Shrek)",rater:"Jens",rating:3.0,date:""},
+      {drink:"New Gen",rater:"João",rating:4.4,date:""},
+      {drink:"New Gen",rater:"Alessio",rating:4.0,date:""},
+      {drink:"New Gen",rater:"Simo",rating:2.1,date:""},
+      {drink:"New Gen",rater:"Zoltan",rating:4.0,date:""},
+      {drink:"Rockstar tropical guava",rater:"João",rating:3.7,date:""},
+      {drink:"Rockstar tropical guava",rater:"Alessio",rating:3.3,date:""},
+      {drink:"Rockstar tropical guava",rater:"Zoltan",rating:3.0,date:""},
+      {drink:"Rockstar tropical guava",rater:"Lonny",rating:4.0,date:""},
+      {drink:"Rockstar tropical guava",rater:"Simo",rating:4.2,date:""},
+      {drink:"Xixo tonic",rater:"João",rating:3.7,date:""},
+      {drink:"Xixo tonic",rater:"Zoltan",rating:4.3,date:""},
+      {drink:"Xixo tonic",rater:"Alessio",rating:3.0,date:""},
+      {drink:"Take off",rater:"João",rating:2.4,date:""},
+      {drink:"Take off",rater:"Alessio",rating:2.2,date:""},
+      {drink:"Take off",rater:"Zoltan",rating:1.6,date:""},
+      {drink:"Xixo cola",rater:"João",rating:4.8,date:""},
+      {drink:"Xixo cola",rater:"Zoltan",rating:4.8,date:""},
+      {drink:"Rockstar acai",rater:"João",rating:4.1,date:""},
+      {drink:"Rockstar acai",rater:"Simo",rating:4.8,date:""},
+      {drink:"Predator goldstrike",rater:"João",rating:3.7,date:""},
+      {drink:"Predator goldstrike",rater:"Zoltan",rating:3.6,date:""},
+      {drink:"Monster Peach",rater:"Zoltan",rating:5.0,date:""},
+      {drink:"Monster Peach",rater:"Adam",rating:4.5,date:""},
+      {drink:"Monster Peach",rater:"João",rating:4.3,date:""},
+      {drink:"Monster Peach",rater:"Lucia",rating:3.5,date:""},
+      {drink:"Red Bull purple",rater:"João",rating:4.2,date:""},
+      {drink:"Red Bull purple",rater:"Adam",rating:4.2,date:""},
+      {drink:"Red Bull purple",rater:"Carolina",rating:3.0,date:""},
+      {drink:"Red Bull purple",rater:"Zoltan",rating:3.6,date:""},
+      {drink:"Brite pineapple mango",rater:"João",rating:3.6,date:""},
+      {drink:"Brite pineapple mango",rater:"Adam",rating:2.6,date:""},
+      {drink:"Brite pineapple mango",rater:"Simo",rating:3.0,date:""},
+      {drink:"Brite pineapple mango",rater:"Giacomo",rating:2.5,date:""},
+      {drink:"Brite pineapple mango",rater:"Zoltan",rating:2.0,date:""},
+      {drink:"Nailed berry blush",rater:"João",rating:3.6,date:""},
+      {drink:"Gonergy blueberry coconut",rater:"João",rating:4.3,date:""},
+      {drink:"Gonergy blueberry coconut",rater:"Vicky",rating:2.7,date:""},
+      {drink:"Gonergy blueberry coconut",rater:"Vicky",rating:2.3,date:""},
+      {drink:"Gonergy blueberry coconut",rater:"Zoltan",rating:3.0,date:""},
+      {drink:"Gonergy blueberry coconut",rater:"Adam",rating:3.892,date:""},
+      {drink:"Gonergy blueberry coconut",rater:"Lucia",rating:3.5,date:""},
+      {drink:"Gonergy blueberry coconut",rater:"Iryna",rating:2.0,date:""},
+      {drink:"Gonergy blueberry coconut",rater:"Jens",rating:0.0,date:""},
+      {drink:"Effect habibi berry",rater:"João",rating:4.75,date:""},
+      {drink:"Effect habibi berry",rater:"Em",rating:3.0,date:""},
+      {drink:"Effect habibi berry",rater:"Martina",rating:3.4,date:""},
+      {drink:"Effect habibi berry",rater:"Alessio",rating:4.8,date:""},
+      {drink:"Effect habibi berry",rater:"Nice Lady",rating:4.2,date:""},
+      {drink:"Effect habibi berry",rater:"João",rating:3.1,date:""},
+      {drink:"Effect habibi berry",rater:"Zoltan",rating:3.0,date:""},
+      {drink:"Hell watermelon",rater:"João",rating:4.8,date:""},
+      {drink:"Hell watermelon",rater:"Mika",rating:3.7,date:""},
+      {drink:"Hell watermelon",rater:"Nice Girl From Claire's Lab",rating:4.2,date:""},
+      {drink:"Hell watermelon",rater:"Nice Lady",rating:1.1,date:""},
+      {drink:"Hell watermelon",rater:"Dimitris",rating:1.7,date:""},
+      {drink:"Hell watermelon",rater:"Giacomo",rating:4.5,date:""},
+      {drink:"Nocco julmust",rater:"João",rating:2.2,date:""},
+      {drink:"Nocco julmust",rater:"Zoltan",rating:1.5,date:""},
+      {drink:"Nocco julmust",rater:"Vicky",rating:1.4,date:""},
+      {drink:"Nocco julmust",rater:"Simo",rating:2.0,date:""},
+      {drink:"Bomba original",rater:"João",rating:2.9,date:""},
+      {drink:"Bomba original",rater:"Zoltan",rating:3.0,date:""},
+      {drink:"Bomba original",rater:"Vicky",rating:2.4,date:""},
+      {drink:"Brainrot soda cappuccio assassino",rater:"Zoltan",rating:4.5,date:""},
+      {drink:"Brainrot soda cappuccio assassino",rater:"Vicky",rating:3.0,date:""},
+      {drink:"Brainrot soda cappuccio assassino",rater:"João",rating:4.0,date:""},
+      {drink:"Brainrot soda cappuccio assassino",rater:"Nice Lady",rating:4.5,date:""},
+      {drink:"Hurricane berry blast",rater:"João",rating:2.7,date:""},
+      {drink:"Hurricane berry blast",rater:"Zoltan",rating:3.1,date:""},
+      {drink:"Hurricane berry blast",rater:"Vicky",rating:2.5,date:""},
+      {drink:"Bomba cherry sour",rater:"João",rating:4.5,date:""},
+      {drink:"Bomba cherry sour",rater:"Zoltan",rating:4.9,date:""},
+      {drink:"Bomba cherry sour",rater:"Vicky",rating:4.5,date:""}
+    ];
+
+    // Load localStorage additions
+    var LOCAL_KEY = 'jitterpedia_extra';
+    function getLocal() { try { return JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]'); } catch(e) { return []; } }
+    function saveLocal(arr) { localStorage.setItem(LOCAL_KEY, JSON.stringify(arr)); }
+
+    function allData() { return DATA.concat(getLocal()); }
+
+    // ── Color from string hash ──
+    function hashColor(str) {
+      var h = 0;
+      for (var i = 0; i < str.length; i++) h = str.charCodeAt(i) + ((h << 5) - h);
+      var hue = Math.abs(h) % 360;
+      return 'hsl(' + hue + ', 65%, 55%)';
+    }
+
+    // ── Compute drink aggregates ──
+    function aggregate(data, raterFilter) {
+      var filtered = raterFilter ? data.filter(function(d) { return d.rater === raterFilter; }) : data;
+      var map = {};
+      filtered.forEach(function(d) {
+        if (!map[d.drink]) map[d.drink] = { sum: 0, count: 0, ratings: [] };
+        map[d.drink].sum += d.rating;
+        map[d.drink].count++;
+        map[d.drink].ratings.push({ rater: d.rater, rating: d.rating });
+      });
+      var arr = [];
+      for (var name in map) {
+        arr.push({ drink: name, avg: map[name].sum / map[name].count, count: map[name].count, ratings: map[name].ratings });
+      }
+      arr.sort(function(a, b) { return b.avg - a.avg; });
+      return arr;
+    }
+
+    // ── Stats ──
+    function updateStats(data) {
+      var drinks = {}, raters = {}, total = 0, sum = 0;
+      data.forEach(function(d) { drinks[d.drink] = 1; raters[d.rater] = 1; total++; sum += d.rating; });
+      document.getElementById('stat-drinks').textContent = Object.keys(drinks).length;
+      document.getElementById('stat-tastings').textContent = total;
+      document.getElementById('stat-raters').textContent = Object.keys(raters).length;
+      document.getElementById('stat-avg').textContent = total ? (sum / total).toFixed(2) : '0';
+    }
+
+    // ── Render filters ──
+    function renderFilters(data) {
+      var raters = {};
+      data.forEach(function(d) { raters[d.rater] = (raters[d.rater] || 0) + 1; });
+      var sorted = Object.keys(raters).sort(function(a, b) { return raters[b] - raters[a]; });
+      var row = document.getElementById('rater-filters');
+      row.innerHTML = '<button class="jp-filter-btn active" data-rater="">All</button>';
+      sorted.forEach(function(r) {
+        row.innerHTML += '<button class="jp-filter-btn" data-rater="' + r + '">' + r + ' (' + raters[r] + ')</button>';
+      });
+    }
+
+    // ── Render chart ──
+    var currentDrink = null;
+
+    function renderChart(drinks) {
+      var chart = document.getElementById('chart');
+      chart.innerHTML = '';
+      drinks.forEach(function(d) {
+        var pct = (d.avg / 5 * 100).toFixed(1);
+        var color = hashColor(d.drink);
+        var row = document.createElement('div');
+        row.className = 'jp-bar-row';
+        row.setAttribute('data-drink', d.drink);
+        row.innerHTML =
+          '<div class="jp-bar-name" title="' + d.drink + '">' + d.drink + '</div>' +
+          '<div class="jp-bar-track"><div class="jp-bar-fill" style="width:' + pct + '%;background:' + color + '"><span class="jp-bar-score">' + d.avg.toFixed(2) + '</span></div></div>' +
+          '<div class="jp-bar-count">n=' + d.count + '</div>';
+        chart.appendChild(row);
+      });
+    }
+
+    function showDetail(drink, drinks) {
+      var detail = document.getElementById('detail');
+      var title = document.getElementById('detail-title');
+      var grid = document.getElementById('detail-grid');
+      var entry = drinks.find(function(d) { return d.drink === drink; });
+      if (!entry) { detail.classList.remove('show'); return; }
+      title.textContent = drink + ' — ' + entry.avg.toFixed(2) + ' avg';
+      grid.innerHTML = '';
+      entry.ratings.sort(function(a, b) { return b.rating - a.rating; }).forEach(function(r) {
+        grid.innerHTML += '<div class="jp-detail-item"><span class="jp-detail-rater">' + r.rater + '</span><span class="jp-detail-rating">' + r.rating.toFixed(1) + '</span></div>';
+      });
+      detail.classList.add('show');
+    }
+
+    // ── Populate datalists ──
+    function populateDataLists(data) {
+      var drinks = {}, raters = {};
+      data.forEach(function(d) { drinks[d.drink] = 1; raters[d.rater] = 1; });
+      var dl = document.getElementById('drink-list');
+      dl.innerHTML = '';
+      Object.keys(drinks).sort().forEach(function(d) { dl.innerHTML += '<option value="' + d + '">'; });
+      var rl = document.getElementById('rater-list');
+      rl.innerHTML = '';
+      Object.keys(raters).sort().forEach(function(r) { rl.innerHTML += '<option value="' + r + '">'; });
+    }
+
+    // ── Toast ──
+    function toast(msg) {
+      var t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(function() { t.classList.remove('show'); }, 2000);
+    }
+
+    // ── Full render ──
+    var activeRater = '';
+
+    function render() {
+      var data = allData();
+      updateStats(data);
+      renderFilters(data);
+      populateDataLists(data);
+      var drinks = aggregate(data, activeRater || null);
+      renderChart(drinks);
+      // Reattach filter listeners
+      document.querySelectorAll('.jp-filter-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.jp-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          activeRater = btn.getAttribute('data-rater');
+          var drinks = aggregate(allData(), activeRater || null);
+          renderChart(drinks);
+          document.getElementById('detail').classList.remove('show');
+          attachBarListeners(drinks);
+        });
+      });
+      attachBarListeners(drinks);
+    }
+
+    function attachBarListeners(drinks) {
+      document.querySelectorAll('.jp-bar-row').forEach(function(row) {
+        row.addEventListener('click', function() {
+          showDetail(row.getAttribute('data-drink'), drinks);
+        });
+      });
+    }
+
+    // ── Add rating ──
+    document.getElementById('add-btn').addEventListener('click', function() {
+      var drink = document.getElementById('add-drink').value.trim();
+      var rater = document.getElementById('add-rater').value.trim();
+      var rating = parseFloat(document.getElementById('add-rating').value);
+      if (!drink || !rater || isNaN(rating) || rating < 0 || rating > 5) {
+        toast('Please fill all fields (rating 0-5)');
+        return;
+      }
+      var extra = getLocal();
+      extra.push({ drink: drink, rater: rater, rating: rating, date: new Date().toISOString().slice(0, 10) });
+      saveLocal(extra);
+      document.getElementById('add-drink').value = '';
+      document.getElementById('add-rater').value = '';
+      document.getElementById('add-rating').value = '';
+      toast('Rating added!');
+      render();
+    });
+
+    // ── Export CSV ──
+    document.getElementById('export-btn').addEventListener('click', function() {
+      var data = allData();
+      var csv = 'drink,rater,rating,date\n';
+      data.forEach(function(d) {
+        csv += '"' + d.drink.replace(/"/g, '""') + '","' + d.rater.replace(/"/g, '""') + '",' + d.rating + ',' + (d.date || '') + '\n';
+      });
+      var blob = new Blob([csv], { type: 'text/csv' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'jitterpedia_ratings.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+      toast('CSV exported!');
+    });
+
+    // ── Init ──
+    render();
+  })();
+  </script>
+</body>
+</html>

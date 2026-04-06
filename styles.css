@@ -331,12 +331,25 @@ a {
   gap: 0.8rem;
 }
 
-.tag-grid span {
+.tag-grid span,
+.tag-grid .tag-link {
   padding: 0.7rem 1rem;
   border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--muted);
   background: var(--panel);
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.tag-link:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+.tag-link--accent {
+  border-color: rgba(183, 255, 93, 0.3);
+  color: var(--accent);
 }
 
 /* Publications */
