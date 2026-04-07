@@ -39,6 +39,7 @@
       cursor: pointer; transition: opacity 0.15s ease;
     }
     .jp-bar-row:hover { opacity: 0.85; }
+    .jp-bar-row.has-pending { border-left: 3px solid rgba(183, 255, 93, 0.4); padding-left: 0.5rem; }
     .jp-bar-name { width: 260px; min-width: 260px; text-align: right; font-size: 0.85rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .jp-bar-name a { color: var(--muted); text-decoration: none; transition: color 0.15s; }
     .jp-bar-name a:hover { color: var(--accent); text-decoration: underline; }
@@ -55,18 +56,15 @@
     .jp-detail h3 { margin: 0 0 0.8rem; font-size: 1.2rem; }
     .jp-detail-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.5rem; }
     .jp-detail-item { display: flex; justify-content: space-between; padding: 0.4rem 0.6rem; border-radius: 6px; background: rgba(255,255,255,0.03); }
+    .jp-detail-item.pending { border: 1px dashed rgba(183, 255, 93, 0.35); }
     .jp-detail-rater { color: var(--muted); font-size: 0.9rem; }
     .jp-detail-rating { font-weight: 600; color: var(--accent); font-size: 0.9rem; }
+    .jp-pending-tag { font-size: 0.7rem; color: rgba(183, 255, 93, 0.6); font-family: "IBM Plex Mono", monospace; margin-left: 0.3rem; }
 
     /* Add rating section */
     .jp-add { margin-top: 3rem; padding: 1.4rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
     .jp-add h3 { margin: 0 0 0.3rem; font-size: 1.1rem; }
     .jp-add-hint { margin: 0 0 1rem; color: var(--muted); font-size: 0.85rem; }
-
-    .jp-auth { display: flex; gap: 0.6rem; align-items: flex-end; margin-bottom: 1rem; }
-    .jp-auth.authed { display: none; }
-    .jp-add-inner { display: none; }
-    .jp-add-inner.unlocked { display: block; }
 
     .jp-drink-row { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: flex-end; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
     .jp-rating-rows { margin-bottom: 1rem; }
@@ -93,8 +91,11 @@
     }
     .jp-btn--ghost:hover { border-color: var(--accent); color: var(--text); }
     .jp-btn--sm { padding: 0.35rem 0.8rem; font-size: 0.82rem; }
+    .jp-btn--danger { border-color: #ff6b6b; color: #ff6b6b; }
+    .jp-btn--danger:hover { background: #ff6b6b; color: #0b0b0c; border-color: transparent; }
 
-    .jp-export { margin-top: 1rem; }
+    .jp-actions { margin-top: 1rem; display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
+    .jp-pending-count { font-size: 0.85rem; color: rgba(183, 255, 93, 0.7); font-family: "IBM Plex Mono", monospace; }
 
     .jp-toast {
       position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
@@ -155,55 +156,48 @@
         <!-- Add ratings -->
         <div class="jp-add">
           <h3>Add ratings</h3>
-          <p class="jp-add-hint">Enter the password to unlock. Fill in the drink once, then add multiple raters in bulk.</p>
+          <p class="jp-add-hint">Ratings are saved locally as pending. The site owner reviews and commits them to make them official.</p>
 
-          <div class="jp-auth" id="auth-row">
+          <div class="jp-drink-row">
             <div class="jp-field">
-              <label for="pw">Password</label>
-              <input type="password" id="pw" placeholder="Enter password" />
+              <label for="add-brand">Brand</label>
+              <input type="text" id="add-brand" placeholder="e.g. Monster" list="brand-list" style="width:160px" />
+              <datalist id="brand-list"></datalist>
             </div>
-            <button class="jp-btn" id="auth-btn">Unlock</button>
+            <div class="jp-field">
+              <label for="add-model">Model</label>
+              <input type="text" id="add-model" placeholder="e.g. Ultra White" style="width:180px" />
+            </div>
+            <div class="jp-field">
+              <label for="add-link">Product link (optional)</label>
+              <input type="url" id="add-link" placeholder="https://..." style="width:240px" />
+            </div>
           </div>
 
-          <div class="jp-add-inner" id="add-inner">
-            <div class="jp-drink-row">
+          <div class="jp-rating-rows" id="rating-rows">
+            <div class="jp-rating-entry">
               <div class="jp-field">
-                <label for="add-brand">Brand</label>
-                <input type="text" id="add-brand" placeholder="e.g. Monster" list="brand-list" style="width:160px" />
-                <datalist id="brand-list"></datalist>
+                <label>Rater</label>
+                <select class="rater-select" style="width:160px"></select>
               </div>
               <div class="jp-field">
-                <label for="add-model">Model</label>
-                <input type="text" id="add-model" placeholder="e.g. Ultra White" style="width:180px" />
-              </div>
-              <div class="jp-field">
-                <label for="add-link">Product link (optional)</label>
-                <input type="url" id="add-link" placeholder="https://..." style="width:240px" />
+                <label>Score (0-5)</label>
+                <input type="number" class="score-input" min="0" max="5" step="0.1" placeholder="3.5" style="width:90px" />
               </div>
             </div>
+          </div>
 
-            <div class="jp-rating-rows" id="rating-rows">
-              <div class="jp-rating-entry">
-                <div class="jp-field">
-                  <label>Rater</label>
-                  <select class="rater-select" style="width:160px"></select>
-                </div>
-                <div class="jp-field">
-                  <label>Score (0-5)</label>
-                  <input type="number" class="score-input" min="0" max="5" step="0.1" placeholder="3.5" style="width:90px" />
-                </div>
-              </div>
-            </div>
-
-            <div class="jp-bulk-actions">
-              <button class="jp-btn--ghost jp-btn--sm" id="add-row-btn">+ Add rater row</button>
-              <button class="jp-btn" id="submit-btn">Submit all ratings</button>
-            </div>
+          <div class="jp-bulk-actions">
+            <button class="jp-btn--ghost jp-btn--sm" id="add-row-btn">+ Add rater row</button>
+            <button class="jp-btn" id="submit-btn">Submit ratings</button>
           </div>
         </div>
 
-        <div class="jp-export">
-          <button class="jp-btn--ghost jp-btn--sm" id="export-btn">Export CSV</button>
+        <div class="jp-actions">
+          <button class="jp-btn--ghost jp-btn--sm" id="export-pending-btn">Export pending (CSV)</button>
+          <button class="jp-btn--ghost jp-btn--sm" id="export-all-btn">Export all (CSV)</button>
+          <button class="jp-btn--ghost jp-btn--sm jp-btn--danger" id="clear-pending-btn" style="display:none">Clear pending</button>
+          <span class="jp-pending-count" id="pending-count"></span>
         </div>
       </div>
     </section>
@@ -221,46 +215,47 @@
   <script src="jitterpedia-data.js"></script>
   <script>
   (function () {
-    var PASSWORD = 'pogagnolo';
-    var LOCAL_KEY = 'jitterpedia_extra';
+    var LOCAL_KEY = 'jitterpedia_pending';
 
-    function getLocal() { try { return JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]'); } catch(e) { return []; } }
-    function saveLocal(arr) { localStorage.setItem(LOCAL_KEY, JSON.stringify(arr)); }
+    function getPending() { try { return JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]'); } catch(e) { return []; } }
+    function savePending(arr) { localStorage.setItem(LOCAL_KEY, JSON.stringify(arr)); }
+
+    // Merge official + pending, filtering NaN scores
     function allData() {
-      return JITTERPEDIA_DATA.concat(getLocal()).filter(function(d) {
+      var official = JITTERPEDIA_DATA.map(function(d) { d._pending = false; return d; });
+      var pending = getPending().map(function(d) { d._pending = true; return d; });
+      return official.concat(pending).filter(function(d) {
         return d.score !== '' && d.score !== null && !isNaN(d.score);
       });
     }
 
-    // Color from string hash
     function hashColor(str) {
       var h = 0;
       for (var i = 0; i < str.length; i++) h = str.charCodeAt(i) + ((h << 5) - h);
       return 'hsl(' + (Math.abs(h) % 360) + ', 60%, 52%)';
     }
 
-    // Escape HTML
     function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
-    // Aggregate by brand + model
+    // Aggregate by brand + model, track pending
     function aggregate(data, raterFilter) {
       var filtered = raterFilter ? data.filter(function(d) { return d.rater === raterFilter; }) : data;
       var map = {};
       filtered.forEach(function(d) {
-        var key = d.brand + ' — ' + d.model;
-        if (!map[key]) map[key] = { brand: d.brand, model: d.model, sum: 0, count: 0, ratings: [], link: d.product_link || '' };
+        var key = d.brand + ' \u2014 ' + d.model;
+        if (!map[key]) map[key] = { brand: d.brand, model: d.model, sum: 0, count: 0, ratings: [], link: d.product_link || '', hasPending: false };
         map[key].sum += d.score;
         map[key].count++;
-        map[key].ratings.push({ rater: d.rater, rating: d.score });
+        map[key].ratings.push({ rater: d.rater, rating: d.score, pending: !!d._pending });
+        if (d._pending) map[key].hasPending = true;
         if (d.product_link && !map[key].link) map[key].link = d.product_link;
       });
       var arr = [];
-      for (var k in map) arr.push({ name: k, avg: map[k].sum / map[k].count, count: map[k].count, ratings: map[k].ratings, link: map[k].link });
+      for (var k in map) arr.push({ name: k, avg: map[k].sum / map[k].count, count: map[k].count, ratings: map[k].ratings, link: map[k].link, hasPending: map[k].hasPending });
       arr.sort(function(a, b) { return b.avg - a.avg; });
       return arr;
     }
 
-    // Stats
     function updateStats(data) {
       var drinks = {}, raters = {}, sum = 0;
       data.forEach(function(d) { drinks[d.brand + '|' + d.model] = 1; raters[d.rater] = 1; sum += d.score; });
@@ -270,7 +265,6 @@
       document.getElementById('stat-avg').textContent = data.length ? (sum / data.length).toFixed(2) : '0';
     }
 
-    // Rater filters
     function renderFilters(data) {
       var raters = {};
       data.forEach(function(d) { raters[d.rater] = (raters[d.rater] || 0) + 1; });
@@ -282,7 +276,6 @@
       });
     }
 
-    // Chart
     function renderChart(drinks) {
       var chart = document.getElementById('chart');
       chart.innerHTML = '';
@@ -293,7 +286,7 @@
           ? '<a href="' + esc(d.link) + '" target="_blank" rel="noopener" title="View product">' + esc(d.name) + '</a>'
           : esc(d.name);
         var row = document.createElement('div');
-        row.className = 'jp-bar-row';
+        row.className = 'jp-bar-row' + (d.hasPending ? ' has-pending' : '');
         row.setAttribute('data-drink', d.name);
         row.innerHTML =
           '<div class="jp-bar-name" title="' + esc(d.name) + '">' + nameHtml + '</div>' +
@@ -307,23 +300,22 @@
       var detail = document.getElementById('detail');
       var entry = drinks.find(function(d) { return d.name === drink; });
       if (!entry) { detail.classList.remove('show'); return; }
-      document.getElementById('detail-title').textContent = drink + ' — ' + entry.avg.toFixed(2) + ' avg';
+      document.getElementById('detail-title').textContent = drink + ' \u2014 ' + entry.avg.toFixed(2) + ' avg';
       var grid = document.getElementById('detail-grid');
       grid.innerHTML = '';
       entry.ratings.sort(function(a, b) { return b.rating - a.rating; }).forEach(function(r) {
-        grid.innerHTML += '<div class="jp-detail-item"><span class="jp-detail-rater">' + esc(r.rater) + '</span><span class="jp-detail-rating">' + r.rating.toFixed(1) + '</span></div>';
+        var pendingTag = r.pending ? '<span class="jp-pending-tag">pending</span>' : '';
+        grid.innerHTML += '<div class="jp-detail-item' + (r.pending ? ' pending' : '') + '"><span class="jp-detail-rater">' + esc(r.rater) + pendingTag + '</span><span class="jp-detail-rating">' + r.rating.toFixed(1) + '</span></div>';
       });
       detail.classList.add('show');
     }
 
-    // Rater list for dropdowns
     function getRaters(data) {
       var set = {};
       data.forEach(function(d) { set[d.rater] = 1; });
       return Object.keys(set).sort();
     }
 
-    // Brand datalist
     function populateBrands(data) {
       var brands = {};
       data.forEach(function(d) { brands[d.brand] = 1; });
@@ -332,7 +324,6 @@
       Object.keys(brands).sort().forEach(function(b) { dl.innerHTML += '<option value="' + esc(b) + '">'; });
     }
 
-    // Build rater <select> dropdown
     function buildRaterSelect(raters) {
       var html = '<option value="">Select rater...</option>';
       raters.forEach(function(r) { html += '<option value="' + esc(r) + '">' + esc(r) + '</option>'; });
@@ -340,7 +331,6 @@
       return html;
     }
 
-    // Handle rater select change (new rater prompt)
     function handleRaterSelect(sel) {
       if (sel.value === '__new__') {
         var name = prompt('Enter new rater name:');
@@ -350,17 +340,27 @@
           opt.value = name; opt.textContent = name;
           sel.insertBefore(opt, sel.querySelector('[value="__new__"]'));
           sel.value = name;
-        } else {
-          sel.value = '';
-        }
+        } else { sel.value = ''; }
       }
     }
 
-    // Toast
     function toast(msg) {
       var t = document.getElementById('toast');
       t.textContent = msg; t.classList.add('show');
       setTimeout(function() { t.classList.remove('show'); }, 2000);
+    }
+
+    function updatePendingUI() {
+      var pending = getPending();
+      var countEl = document.getElementById('pending-count');
+      var clearBtn = document.getElementById('clear-pending-btn');
+      if (pending.length > 0) {
+        countEl.textContent = pending.length + ' pending rating' + (pending.length > 1 ? 's' : '');
+        clearBtn.style.display = '';
+      } else {
+        countEl.textContent = '';
+        clearBtn.style.display = 'none';
+      }
     }
 
     // Full render
@@ -375,6 +375,7 @@
       renderChart(drinks);
       attachListeners(drinks);
       updateRaterDropdowns(data);
+      updatePendingUI();
     }
 
     function attachListeners(drinks) {
@@ -396,7 +397,7 @@
     function attachBarListeners(drinks) {
       document.querySelectorAll('.jp-bar-row').forEach(function(row) {
         row.addEventListener('click', function(e) {
-          if (e.target.tagName === 'A') return; // let links work
+          if (e.target.tagName === 'A') return;
           showDetail(row.getAttribute('data-drink'), drinks);
         });
       });
@@ -411,20 +412,6 @@
         if (cur) sel.value = cur;
       });
     }
-
-    // Auth
-    document.getElementById('auth-btn').addEventListener('click', function() {
-      if (document.getElementById('pw').value === PASSWORD) {
-        document.getElementById('auth-row').classList.add('authed');
-        document.getElementById('add-inner').classList.add('unlocked');
-        toast('Unlocked!');
-      } else {
-        toast('Wrong password');
-      }
-    });
-    document.getElementById('pw').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') document.getElementById('auth-btn').click();
-    });
 
     // Add rater row
     document.getElementById('add-row-btn').addEventListener('click', function() {
@@ -443,7 +430,7 @@
     // Handle rater select on initial row
     document.querySelector('.rater-select').addEventListener('change', function() { handleRaterSelect(this); });
 
-    // Submit all
+    // Submit
     document.getElementById('submit-btn').addEventListener('click', function() {
       var brand = document.getElementById('add-brand').value.trim();
       var model = document.getElementById('add-model').value.trim();
@@ -463,20 +450,35 @@
 
       if (!valid || newRatings.length === 0) { toast('Fill in all rater/score fields (0-5)'); return; }
 
-      var extra = getLocal();
-      newRatings.forEach(function(r) { extra.push(r); });
-      saveLocal(extra);
+      var pending = getPending();
+      newRatings.forEach(function(r) { pending.push(r); });
+      savePending(pending);
 
-      // Clear score fields but keep drink info
+      // Clear score fields but keep drink info for quick re-entry
       document.querySelectorAll('.score-input').forEach(function(inp) { inp.value = ''; });
       document.querySelectorAll('.rater-select').forEach(function(sel) { sel.value = ''; });
 
-      toast(newRatings.length + ' rating(s) added!');
+      toast(newRatings.length + ' pending rating' + (newRatings.length > 1 ? 's' : '') + ' added!');
       render();
     });
 
-    // Export
-    document.getElementById('export-btn').addEventListener('click', function() {
+    // Export pending only
+    document.getElementById('export-pending-btn').addEventListener('click', function() {
+      var pending = getPending();
+      if (pending.length === 0) { toast('No pending ratings'); return; }
+      var csv = 'brand,model,rater,score,product_link\n';
+      pending.forEach(function(d) {
+        csv += '"' + (d.brand||'').replace(/"/g,'""') + '","' + (d.model||'').replace(/"/g,'""') + '","' + (d.rater||'').replace(/"/g,'""') + '",' + d.score + ',"' + (d.product_link||'').replace(/"/g,'""') + '"\n';
+      });
+      var blob = new Blob([csv], { type: 'text/csv' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob); a.download = 'jitterpedia_pending.csv'; a.click();
+      URL.revokeObjectURL(a.href);
+      toast('Pending CSV exported!');
+    });
+
+    // Export all
+    document.getElementById('export-all-btn').addEventListener('click', function() {
       var data = allData();
       var csv = 'brand,model,rater,score,product_link\n';
       data.forEach(function(d) {
@@ -484,11 +486,17 @@
       });
       var blob = new Blob([csv], { type: 'text/csv' });
       var a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'jitterpedia_ratings.csv';
-      a.click();
+      a.href = URL.createObjectURL(blob); a.download = 'jitterpedia_all.csv'; a.click();
       URL.revokeObjectURL(a.href);
-      toast('CSV exported!');
+      toast('Full CSV exported!');
+    });
+
+    // Clear pending
+    document.getElementById('clear-pending-btn').addEventListener('click', function() {
+      if (!confirm('Clear all pending ratings? Make sure you\'ve exported them first.')) return;
+      savePending([]);
+      toast('Pending ratings cleared');
+      render();
     });
 
     // Init
