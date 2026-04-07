@@ -226,7 +226,11 @@
 
     function getLocal() { try { return JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]'); } catch(e) { return []; } }
     function saveLocal(arr) { localStorage.setItem(LOCAL_KEY, JSON.stringify(arr)); }
-    function allData() { return JITTERPEDIA_DATA.concat(getLocal()); }
+    function allData() {
+      return JITTERPEDIA_DATA.concat(getLocal()).filter(function(d) {
+        return d.score !== '' && d.score !== null && !isNaN(d.score);
+      });
+    }
 
     // Color from string hash
     function hashColor(str) {
