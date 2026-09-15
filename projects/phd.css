@@ -1,0 +1,117 @@
+.phd-page .site-header {
+  border-bottom: 1px solid var(--ink);
+  padding: 24px 0;
+}
+.phd-page .header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+.phd-page nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  font-size: 14px;
+}
+.phd-page .eyebrow {
+  font:
+    12px/1.5 "Courier New",
+    monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--quiet);
+}
+.phd-page .project-hero {
+  padding: 64px 0 44px;
+  border-bottom: 1px solid var(--ink);
+}
+.phd-page h1 {
+  font-size: clamp(38px, 5vw, 70px);
+  letter-spacing: -0.055em;
+  line-height: 1.06;
+  font-weight: 400;
+  max-width: 24ch;
+  margin: 24px 0;
+}
+.phd-page .hero-text {
+  font-size: 19px;
+  max-width: 64ch;
+  line-height: 1.6;
+  color: var(--quiet);
+}
+.phd-page .thesis-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 30px;
+}
+.phd-page .button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 12px 18px;
+  border: 1px solid var(--ink);
+}
+.phd-page .button--solid {
+  background: var(--ink);
+  color: var(--paper);
+}
+.phd-page .thesis-body {
+  padding: 44px 0;
+}
+.phd-page .thesis-body h2 {
+  font-size: 32px;
+  margin: 0 0 24px;
+}
+.phd-page .thesis-body h3 {
+  font-size: 23px;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  margin: 32px 0 16px;
+}
+.phd-page .thesis-body p,
+.phd-page .thesis-body li {
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 70ch;
+  color: var(--quiet);
+}
+.phd-page .thesis-body li {
+  margin-bottom: 10px;
+}
+.phd-page .thesis-body p {
+  margin: 0 0 16px;
+}
+.phd-page .thesis-toc {
+  border-block: 1px solid var(--rule);
+  padding: 24px 0;
+  margin: 30px 0;
+}
+.phd-page .thesis-toc h3 {
+  margin-top: 0;
+}
+.phd-page .site-footer {
+  border-top: 1px solid var(--ink);
+  padding: 24px 0;
+  font-size: 14px;
+}
+.phd-page .footer-copy {
+  margin: 0;
+}
+.phd-page .back-link {
+  font-size: 14px;
+}
+@media (max-width: 700px) {
+  .phd-page .header-inner {
+    align-items: start;
+    flex-direction: column;
+  }
+  .phd-page .project-hero {
+    padding-top: 40px;
+  }
+  .phd-page .hero-text {
+    font-size: 17px;
+  }
+}

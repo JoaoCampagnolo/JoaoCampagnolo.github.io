@@ -1,312 +1,224 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>João Campagnolo</title>
-  <meta
-    name="description"
-    content="Personal website of João Campagnolo — Neuroscience PhD, Biomedical Engineer, and computational researcher."
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="styles.css" />
-  <script src="portrait.js" defer></script>
-</head>
-<body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand-block">
-        <a class="brand" href="#top">João Campagnolo</a>
-        <div class="brand-links" aria-label="Contact links">
-          <a class="icon-link" href="mailto:jhc2309@gmail.com" aria-label="Email" title="Email">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-              <path d="M4 7l8 6 8-6"></path>
-            </svg>
-          </a>
-          <a class="icon-link" href="https://github.com/JoaoCampagnolo" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 6v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6.2a4.8 4.8 0 0 0-1.3-3.3 4.5 4.5 0 0 0-.1-3.2s-1.1-.3-3.6 1.3a12.3 12.3 0 0 0-6.2 0C6.3 3.5 5.2 3.8 5.2 3.8a4.5 4.5 0 0 0-.1 3.2A4.8 4.8 0 0 0 3.8 10c0 4.8 2.7 5.9 5.5 6.2-.6.6-.6 1.2-.6 2V22"></path>
-            </svg>
-          </a>
-          <a class="icon-link" href="https://www.linkedin.com/in/joao-campagnolo/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V9h4v2"></path>
-              <rect x="2" y="9" width="4" height="12"></rect>
-              <circle cx="4" cy="4" r="2"></circle>
-            </svg>
-          </a>
-          <a class="icon-link" href="https://orcid.org/0000-0001-9748-5988" target="_blank" rel="noopener" aria-label="ORCID" title="ORCID">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M8 7v0"></path>
-              <path d="M8 10v7"></path>
-              <path d="M12 10h2a3.5 3.5 0 0 1 0 7h-2V10z"></path>
-            </svg>
-          </a>
-        </div>
-      </div>
-
-      <nav class="nav">
-        <a href="#work">Work</a>
-        <a href="#publications">Publications</a>
-        <a href="#about">About</a>
-        <a href="#elsewhere">Elsewhere</a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Personal archive / selected work</p>
-
-          <p class="hero-text">
-            Hi 👋 My name is João Henrique Campagnolo. I am a PhD-trained neuroscientist with a
-            background in biomedical engineering. My work spans stress resilience,
-            behavioral analysis, whole-brain activity mapping, machine learning,
-            and computational research tools.
-          </p>
-
-          <div class="hero-actions">
-            <a class="button button--solid" href="#work">View work</a>
-            <a
-              class="button button--ghost"
-              href="assets/Joao_Campagnolo_CV.pdf"
-              target="_blank"
-              rel="noopener"
-            >
-              Download CV
-            </a>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="João Campagnolo — neuroscientist, biomedical engineer, and maker of computational tools. Research, publications, and independent projects."
+    />
+    <title>João Campagnolo — Research, tools &amp; other curiosities</title>
+    <link rel="canonical" href="https://www.joaocampagnolo.com/" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="site.js" defer></script>
+  </head>
+  <body id="jc-museum">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="jc-page">
+      <header class="jc-nav">
+        <span class="jc-label">João Henrique Campagnolo<br />Neuroscience · Computation</span>
+        <nav aria-label="Portfolio">
+          <a href="#work">Work</a><a href="#projects">Independent projects</a
+          ><a href="#publications">Publications</a><a href="#about">About</a
+          ><button class="theme-toggle" type="button" aria-label="Change colour theme">
+            Light / dark
+          </button>
+        </nav>
+      </header>
+      <main id="main">
+        <section id="top">
+          <h1 class="jc-name">João<span>Campagnolo.</span></h1>
+          <div class="jc-intro">
+            <div class="jc-label">
+              Research, tools<br />&amp; other curiosities.<br /><br />Selected work<br />Personal
+              archive
+            </div>
+            <div>
+              <p class="jc-statement">
+                I study how brains and behaviour respond to stress, and build computational tools to
+                make sense of biological data.
+              </p>
+              <p style="font-size: 16px; color: var(--quiet)">
+                PhD-trained neuroscientist with a background in biomedical engineering.
+              </p>
+              <div class="jc-actions">
+                <a href="assets/Joao_Campagnolo_CV.pdf" target="_blank" rel="noopener"
+                  >Curriculum vitae ↗</a
+                ><a href="mailto:jhc2309@gmail.com">Get in touch ↗</a>
+              </div>
+            </div>
+            <figure>
+              <img
+                class="jc-portrait"
+                src="images/portrait_xx25_no_bg_cropped_e.jpg"
+                alt="João Campagnolo"
+              />
+              <figcaption>01 / João Campagnolo</figcaption>
+            </figure>
           </div>
-        </div>
-
-        <div class="hero-panel">
-          <div class="hero-panel__inner">
-            <p class="panel-label">Current focus</p>
-            <ul class="panel-list">
-              <li>Computational &amp; systems neuroscience</li>
-              <li>Stress resilience and recovery dynamics</li>
-              <li>Active inference / Predictive Coding </li>
-              <li>ML for biomedical and behavioral data</li>
-              <li>BERT / BioBERT for clinical-trial text</li>
-            </ul>
+        </section>
+        <section class="jc-section" id="work">
+          <div class="jc-sectionhead">
+            <h2>Selected work</h2>
+            <span class="jc-label">01—04 / Research &amp; teaching</span>
           </div>
-        </div>
-
-        <div class="hero-portrait">
-          <canvas id="portrait-canvas"></canvas>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="work">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Selected work</p>
-          <h2>Research, projects, and teaching.</h2>
-        </div>
-
-        <div class="project-grid">
-          <a class="project-card" href="projects/phd.html">
-            <p class="project-meta">Research / PhD</p>
-            <h3>Stress resilience in larval zebrafish</h3>
-            <p>
-              PhD work on behavioral recovery after acute stress, combining
-              standardized assays, whole-brain activity mapping, multivariate
-              analysis, and Python pipelines. Public-facing material focuses on
-              methods and scope while manuscripts remain in preparation.
-            </p>
-            <span class="project-link">View thesis &amp; research</span>
-          </a>
-
+          <a class="jc-work" href="projects/phd.html" target="_blank" rel="noopener"
+            ><span class="jc-index">01</span
+            ><strong>Stress resilience<br />in larval zebrafish</strong>
+            <p>PhD research<br />Behaviour · Whole-brain activity</p>
+            <span class="jc-arrow">↗</span></a
+          >
           <a
-            class="project-card"
+            class="jc-work"
             href="https://github.com/JoaoCampagnolo/Behav_clustering_thesis"
             target="_blank"
             rel="noopener"
+            ><span class="jc-index">02</span><strong>Quantifying behaviour</strong>
+            <p>MSc research / EPFL<br />Pose · Unsupervised learning</p>
+            <span class="jc-arrow">↗</span></a
           >
-            <p class="project-meta">Research / MSc</p>
-            <h3>Unsupervised behavior quantification</h3>
-            <p>
-              Master’s thesis work at EPFL on unsupervised quantification of
-              Drosophila behavior from pose and kinematic features, contributing
-              to computational behavior analysis and related DeepFly3D work.
-            </p>
-            <span class="project-link">Open repository</span>
-          </a>
-
           <a
-            class="project-card"
+            class="jc-work"
             href="https://github.com/JoaoCampagnolo/PillProphet"
             target="_blank"
             rel="noopener"
+            ><span class="jc-index">03</span><strong>PillProphet</strong>
+            <p>Independent research tool<br />Clinical trials · NLP</p>
+            <span class="jc-arrow">↗</span></a
           >
-            <p class="project-meta">Independent project</p>
-            <h3>PillProphet</h3>
-            <p>
-              A drug-development prediction project built around structured and
-              unstructured clinical-trial data, combining data collection,
-              NLP-based feature extraction, and predictive modelling.
-            </p>
-            <span class="project-link">Open repository</span>
-          </a>
-
           <a
-            class="project-card"
+            class="jc-work"
             href="https://github.com/JoaoCampagnolo/CompNeuroXX24"
             target="_blank"
             rel="noopener"
+            ><span class="jc-index">04</span><strong>Computational neuroscience</strong>
+            <p>Teaching<br />Models · Practical materials</p>
+            <span class="jc-arrow">↗</span></a
           >
-            <p class="project-meta">Teaching</p>
-            <h3>Computational Neuroscience</h3>
-            <p>
-              Teaching materials and practical content developed for master’s
-              students in computational neuroscience, with a focus on intuition,
-              scientific reasoning, and accessible machine learning.
-            </p>
-            <span class="project-link">Open repository</span>
-          </a>
-
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--alt" id="publications">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Selected publications</p>
-          <h2>Papers and manuscripts.</h2>
-        </div>
-
-        <div class="pub-list">
-          <div class="pub-item">
-            <span class="pub-badge">eLife</span>
-            <div class="pub-details">
-              <h3>DeepFly3D, a deep learning-based approach for 3D limb and appendage tracking in tethered, adult Drosophila</h3>
-              <p class="pub-authors">S. G&uuml;nel, H. Rhodin, D. Morales, <strong>J.H. Campagnolo</strong>, P. Ramdya, P. Fua</p>
-              <p class="pub-venue"><em>eLife</em>, 2019</p>
-              <div class="pub-links">
-                <a class="pub-link" href="https://elifesciences.org/articles/48571" target="_blank" rel="noopener">HTML</a>
+        </section>
+        <section class="jc-section" id="projects">
+          <div class="jc-sectionhead">
+            <h2>Independent projects</h2>
+            <span class="jc-label">Collections &amp; communities</span>
+          </div>
+          <div class="jc-projects">
+            <a
+              class="jc-project"
+              href="https://panumateket.pogagnolo.chatgpt.site/"
+              target="_blank"
+              rel="noopener"
+              ><div class="jc-project-art jc-panum-art"><span>PANUMATEKET</span></div>
+              <div class="jc-project-title">Panumateket <span>↗</span></div>
+              <p>A film-night ballot and screening archive.<br />Cinema, chosen together.</p></a
+            >
+            <a class="jc-project" href="https://jitterpedia.pogagnolo.chatgpt.site/"
+              ><div class="jc-project-art jc-jitter-art">
+                <img src="images/jitterpedia-wordmark.png" alt="Jitterpedia" loading="lazy" />
               </div>
-            </div>
+              <span class="jc-project-title">Jitterpedia <span>→</span></span>
+              <p>
+                A collective catalogue of energy drinks.<br />Personal taste, carefully recorded.
+              </p></a
+            >
           </div>
-
-          <div class="pub-item">
-            <span class="pub-badge pub-badge--prep">In prep</span>
-            <div class="pub-details">
+        </section>
+        <section class="jc-section" id="publications">
+          <div class="jc-sectionhead">
+            <h2>Papers &amp; manuscripts</h2>
+            <span class="jc-label">Published &amp; in preparation</span>
+          </div>
+          <article class="publication">
+            <div class="publication-status"><span>2019</span><span>eLife</span></div>
+            <div>
+              <h3>
+                <a href="https://elifesciences.org/articles/48571" target="_blank" rel="noopener"
+                  >DeepFly3D, a deep learning-based approach for 3D limb and appendage tracking in
+                  tethered, adult Drosophila ↗</a
+                >
+              </h3>
+              <p>
+                S. Günel, H. Rhodin, D. Morales, <strong>J.H. Campagnolo</strong>, P. Ramdya, P. Fua
+              </p>
+            </div>
+          </article>
+          <article class="publication">
+            <div class="publication-status"><span>In preparation</span><span>Manuscript</span></div>
+            <div>
               <h3>Quantifying Stress Resilience as Locomotor Rebound in Larval Zebrafish</h3>
-              <p class="pub-authors"><strong>J.H. Campagnolo</strong>, E. Ahmad, R. Selvan, F. Kermen</p>
-              <p class="pub-venue">Manuscript in preparation</p>
+              <p><strong>J.H. Campagnolo</strong>, E. Ahmad, R. Selvan, F. Kermen</p>
             </div>
-          </div>
-
-          <div class="pub-item">
-            <span class="pub-badge pub-badge--prep">In prep</span>
-            <div class="pub-details">
-              <h3>Neural correlates of interindividual variability in rebound from acute stress in the zebrafish</h3>
-              <p class="pub-authors"><strong>J.H. Campagnolo</strong>, L.P. Rigola, J.L. Korn, R. Selvan, F. Kermen</p>
-              <p class="pub-venue">Manuscript in preparation</p>
+          </article>
+          <article class="publication">
+            <div class="publication-status"><span>In preparation</span><span>Manuscript</span></div>
+            <div>
+              <h3>
+                Neural correlates of interindividual variability in rebound from acute stress in the
+                zebrafish
+              </h3>
+              <p><strong>J.H. Campagnolo</strong>, L.P. Rigola, J.L. Korn, R. Selvan, F. Kermen</p>
             </div>
+          </article>
+        </section>
+        <section class="jc-section about-grid" id="about">
+          <div>
+            <span class="jc-label">Background</span>
+            <h2>Between experiment<br />&amp; computation.</h2>
+            <p style="color: var(--quiet); margin-top: 28px">
+              Also: cinema, cycling, football,<br />history, and tennis.
+            </p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="about">
-      <div class="container split">
-        <div>
-          <p class="eyebrow">Background</p>
-          <h2>Scientific training, computational bias.</h2>
-        </div>
-
-        <div class="prose">
-          <p>
-            I am a neuroscientist with a background in
-            <a href="https://www.ulisboa.pt/" target="_blank" rel="noopener">Biomedical Engineering and Biophysics</a>.
-            I completed my PhD in Neuroscience at the
-            <a href="https://www.ku.dk/en" target="_blank" rel="noopener">University of Copenhagen</a>,
-            where I worked in
-            <a href="https://in.ku.dk/research/kermen-lab/" target="_blank" rel="noopener">Florence Kermen's lab</a>
-            on the neural correlates of stress resilience in larval zebrafish. My doctoral work combined behavioral assays,
-            whole-brain activity mapping, multivariate statistics, and scientific programming to study how brains recover from acute stress.
-          </p>
-          <p>
-            Before that, I carried out my master's thesis at
-            <a href="https://www.epfl.ch/en/" target="_blank" rel="noopener">EPFL</a>
-            in
-            <a href="https://www.epfl.ch/labs/ramdya-lab/" target="_blank" rel="noopener">Pavan Ramdya's lab</a>,
-            where I worked on unsupervised quantification of behavior in <em>Drosophila melanogaster</em>.
-            Across these research settings, I have moved between experiment and computation:
-            behavior quantification, imaging data, machine learning, statistical analysis, and building tools that make scientific questions easier to handle.
-          </p>
-          <p>
-            I am particularly interested in computational and systems neuroscience, active inference, and machine learning methods applied to biological and biomedical data.
-            I also enjoy independent projects that sit slightly outside my formal research path &mdash; from clinical-trial NLP work such as PillProphet
-            to smaller side projects that are somewhere between useful, curious, and unnecessarily committed.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="elsewhere">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Elsewhere</p>
-          <h2>Interests outside the lab notebook.</h2>
-        </div>
-
-        <div class="tag-grid">
-          <a href="https://letterboxd.com/pogagnolo/" target="_blank" rel="noopener" class="tag-link tag-link--accent">Cinema</a>
-          <a href="projects/jitterpedia.html" class="tag-link tag-link--accent">Jitterpedia</a>
-          <span>Cycling</span>
-          <span>Football</span>
-          <span>History</span>
-          <span>Tennis</span>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-compact">
-      <div class="footer-icons" aria-label="Contact links">
-        <a class="footer-icon-link" href="mailto:jhc2309@gmail.com" aria-label="Email" title="Email">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-            <path d="M4 7l8 6 8-6"></path>
-          </svg>
-        </a>
-        <a class="footer-icon-link" href="https://github.com/JoaoCampagnolo" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 6v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6.2a4.8 4.8 0 0 0-1.3-3.3 4.5 4.5 0 0 0-.1-3.2s-1.1-.3-3.6 1.3a12.3 12.3 0 0 0-6.2 0C6.3 3.5 5.2 3.8 5.2 3.8a4.5 4.5 0 0 0-.1 3.2A4.8 4.8 0 0 0 3.8 10c0 4.8 2.7 5.9 5.5 6.2-.6.6-.6 1.2-.6 2V22"></path>
-          </svg>
-        </a>
-        <a class="footer-icon-link" href="https://www.linkedin.com/in/joao-campagnolo/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V9h4v2"></path>
-            <rect x="2" y="9" width="4" height="12"></rect>
-            <circle cx="4" cy="4" r="2"></circle>
-          </svg>
-        </a>
-        <a class="footer-icon-link" href="https://orcid.org/0000-0001-9748-5988" target="_blank" rel="noopener" aria-label="ORCID" title="ORCID">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M8 7v0"></path>
-            <path d="M8 10v7"></path>
-            <path d="M12 10h2a3.5 3.5 0 0 1 0 7h-2V10z"></path>
-          </svg>
-        </a>
-      </div>
-      <div class="footer-divider"></div>
-      <p class="footer-copy">&copy; 2026 Jo&atilde;o Campagnolo. Built with plain HTML, CSS, and JS. Hosted on <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>.</p>
+          <div class="prose">
+            <p>
+              I am a neuroscientist with a background in
+              <a href="https://www.ulisboa.pt/" target="_blank" rel="noopener"
+                >Biomedical Engineering and Biophysics</a
+              >. I completed my PhD in Neuroscience at the
+              <a href="https://www.ku.dk/en" target="_blank" rel="noopener"
+                >University of Copenhagen</a
+              >, where I worked in
+              <a href="https://in.ku.dk/research/kermen-lab/" target="_blank" rel="noopener"
+                >Florence Kermen's lab</a
+              >
+              on the neural correlates of stress resilience in larval zebrafish. My doctoral work
+              combined behavioral assays, whole-brain activity mapping, multivariate statistics, and
+              scientific programming to study how brains recover from acute stress.
+            </p>
+            <p>
+              Before that, I carried out my master's thesis at
+              <a href="https://www.epfl.ch/en/" target="_blank" rel="noopener">EPFL</a>
+              in
+              <a href="https://www.epfl.ch/labs/ramdya-lab/" target="_blank" rel="noopener"
+                >Pavan Ramdya's lab</a
+              >, where I worked on unsupervised quantification of behavior in
+              <em>Drosophila melanogaster</em>. Across these research settings, I have moved between
+              experiment and computation: behavior quantification, imaging data, machine learning,
+              statistical analysis, and building tools that make scientific questions easier to
+              handle.
+            </p>
+            <p>
+              I am particularly interested in computational and systems neuroscience, active
+              inference, and machine learning methods applied to biological and biomedical data. I
+              also enjoy independent projects that sit slightly outside my formal research path
+              &mdash; from clinical-trial NLP work such as PillProphet to smaller side projects that
+              are somewhere between useful, curious, and unnecessarily committed.
+            </p>
+          </div>
+        </section>
+      </main>
+      <footer class="jc-footer">
+        <span>João Campagnolo © 2026</span>
+        <nav aria-label="Contact and profiles">
+          <a href="mailto:jhc2309@gmail.com">Email ↗</a
+          ><a href="https://github.com/JoaoCampagnolo" target="_blank" rel="noopener">GitHub ↗</a
+          ><a href="https://www.linkedin.com/in/joao-campagnolo/" target="_blank" rel="noopener"
+            >LinkedIn ↗</a
+          ><a href="https://orcid.org/0000-0001-9748-5988" target="_blank" rel="noopener"
+            >ORCID ↗</a
+          >
+        </nav>
+        <a href="#top">Back to top ↑</a>
+      </footer>
     </div>
-  </footer>
-</body>
+  </body>
 </html>
