@@ -14,7 +14,7 @@ Jitterpedia is a separate Sites app at https://jitterpedia.pogagnolo.chatgpt.sit
 
 The legacy URL `projects/jitterpedia.html` directs visitors to the new app. If the old browser has pending ratings, it first offers their CSV export; browser storage cannot be read across domains. `projects/jitterpedia-data.js` preserves the original source export.
 
-The homepage link should only be published once the new Jitterpedia app is ready for public access. The first hosted version is private to the owner for review.
+The Jitterpedia collection and submission form support public access without accounts. Only its owner approval page requires sign-in. The portfolio redesign remains on its review branch until published through GitHub Pages.
 
 ## Assets
 
