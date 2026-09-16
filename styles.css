@@ -140,12 +140,17 @@
 #jc-museum figure {
   margin: 0;
 }
+#jc-museum .jc-portrait-frame {
+  aspect-ratio: 1/1.1;
+  overflow: hidden;
+  background: var(--photo);
+}
 #jc-museum .jc-portrait {
   display: block;
-  width: 100%;
-  aspect-ratio: 1/1.1;
-  object-fit: cover;
-  background: var(--photo);
+  width: 150%;
+  max-width: none;
+  height: auto;
+  transform: translate(-16.6667%, -8%);
   filter: grayscale(1);
 }
 #jc-museum figcaption {
