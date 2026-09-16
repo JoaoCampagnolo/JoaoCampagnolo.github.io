@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "DM Sans";
+  src: url("assets/fonts/dm-sans.ttf") format("truetype");
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+}
 #jc-museum {
   color-scheme: light dark;
   --paper: light-dark(#f3f1e9, #171817);
@@ -43,8 +50,9 @@
   padding: 12px 28px;
   border-bottom: 1px solid var(--rule);
   font:
-    12px/1.4 "Courier New",
-    monospace;
+    12px/1.4 "DM Sans",
+    "Segoe UI",
+    sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   flex-wrap: wrap;
@@ -79,8 +87,9 @@
 }
 #jc-museum .jc-label {
   font:
-    12px/1.55 "Courier New",
-    monospace;
+    12px/1.55 "DM Sans",
+    "Segoe UI",
+    sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--quiet);
@@ -142,8 +151,9 @@
 #jc-museum figcaption {
   margin-top: 8px;
   font:
-    12px/1.4 "Courier New",
-    monospace;
+    12px/1.4 "DM Sans",
+    "Segoe UI",
+    sans-serif;
   color: var(--quiet);
 }
 #jc-museum .jc-section {
@@ -183,8 +193,9 @@
 }
 #jc-museum .jc-index {
   font:
-    12px "Courier New",
-    monospace;
+    12px "DM Sans",
+    "Segoe UI",
+    sans-serif;
   color: var(--quiet);
 }
 #jc-museum .jc-projects {
@@ -294,8 +305,9 @@
   flex-wrap: wrap;
   padding: 14px 0;
   font:
-    12px/1.6 "Courier New",
-    monospace;
+    12px/1.6 "DM Sans",
+    "Segoe UI",
+    sans-serif;
 }
 #jc-museum .jp-tools {
   display: flex;
@@ -327,8 +339,9 @@
 #jc-museum th {
   text-align: left;
   font:
-    12px/1.4 "Courier New",
-    monospace;
+    12px/1.4 "DM Sans",
+    "Segoe UI",
+    sans-serif;
   color: var(--quiet);
   text-transform: uppercase;
   padding: 10px 0;
@@ -344,8 +357,9 @@
 #jc-museum td:first-child {
   width: 50px;
   font:
-    12px "Courier New",
-    monospace;
+    12px "DM Sans",
+    "Segoe UI",
+    sans-serif;
   color: var(--quiet);
 }
 #jc-museum td:nth-child(2) {
@@ -616,8 +630,9 @@ body {
 }
 #jc-museum .publication-status {
   font:
-    12px/1.6 "Courier New",
-    monospace;
+    12px/1.6 "DM Sans",
+    "Segoe UI",
+    sans-serif;
   color: var(--quiet);
   text-transform: uppercase;
 }
@@ -721,5 +736,76 @@ body {
   *::after {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+/* The title stays selectable live text. Each overlapping letter has a paper edge. */
+#jc-museum .jc-top-contacts {
+  display: flex;
+  justify-content: flex-end;
+  gap: 22px;
+  flex-wrap: wrap;
+  padding: 14px 0 0;
+  font:
+    500 13px/1.5 "DM Sans",
+    "Segoe UI",
+    sans-serif;
+}
+#jc-museum .jc-label,
+#jc-museum .publication-status {
+  font-weight: 500;
+  letter-spacing: 0.055em;
+}
+#jc-museum .jc-name {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  gap: 0.21em;
+  font:
+    400 clamp(48px, 11.4cqw, 155px)/1.13 Arial,
+    Helvetica,
+    sans-serif;
+  letter-spacing: 0;
+  margin: 24px 0 34px;
+  isolation: isolate;
+}
+#jc-museum .jc-name .jc-name-word {
+  display: inline-flex;
+  padding: 0;
+  white-space: nowrap;
+}
+#jc-museum .jc-name .jc-letter {
+  display: inline-block;
+  padding: 0;
+  margin-left: -0.15em;
+  -webkit-text-stroke: 0.028em var(--paper);
+  paint-order: stroke fill;
+}
+#jc-museum .jc-name .jc-letter:first-child {
+  margin-left: 0;
+}
+#jc-museum .jc-name .jc-letter:nth-child(3n) {
+  margin-left: -0.22em;
+}
+#jc-museum .prose .jc-interests {
+  margin-top: 30px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+  font-family: "DM Sans", "Segoe UI", sans-serif;
+  font-size: 15px;
+}
+@container (max-width:650px) {
+  #jc-museum .jc-top-contacts {
+    justify-content: flex-start;
+    gap: 18px;
+  }
+  #jc-museum .jc-name {
+    flex-wrap: wrap;
+    gap: 0;
+    font-size: 16.5cqw;
+    line-height: 1.07;
+  }
+  #jc-museum .jc-name .jc-name-word {
+    width: 100%;
   }
 }

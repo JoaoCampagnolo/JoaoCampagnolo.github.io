@@ -17,8 +17,9 @@
 }
 .phd-page .eyebrow {
   font:
-    12px/1.5 "Courier New",
-    monospace;
+    12px/1.5 "DM Sans",
+    "Segoe UI",
+    sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--quiet);

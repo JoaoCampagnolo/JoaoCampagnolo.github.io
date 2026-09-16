@@ -8,6 +8,8 @@ Serve this folder with `python -m http.server 8001 --bind 127.0.0.1` and open ht
 
 The publication list intentionally retains both manuscripts in preparation. Panumateket links to its existing independent app.
 
+The homepage presents research, publications, background, then independent projects. Contact links appear at both ends. Its overlapping name is accessible live text styled with CSS, so it remains sharp at any screen size. Supporting text uses locally hosted DM Sans; its Open Font License is included in `assets/fonts/DM-Sans-OFL.txt`.
+
 ## Jitterpedia
 
 Jitterpedia is a separate Sites app at https://jitterpedia.pogagnolo.chatgpt.site/. Its standalone source checkout is `jitterpedia-app/` (ignored by this repository, with its own Git history and hosting repository). Its `.openai/hosting.json` is the hosting source of truth. Keep that checkout when moving this development workspace.

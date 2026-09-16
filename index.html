@@ -6,29 +6,50 @@
     <meta name="color-scheme" content="light dark" />
     <meta
       name="description"
-      content="João Campagnolo — neuroscientist, biomedical engineer, and maker of computational tools. Research, publications, and independent projects."
+      content="João Campagnolo · neuroscientist, biomedical engineer, and maker of computational tools. Research, publications, and independent projects."
     />
-    <title>João Campagnolo — Research, tools &amp; other curiosities</title>
+    <title>João Campagnolo · Research, tools &amp; other curiosities</title>
     <link rel="canonical" href="https://www.joaocampagnolo.com/" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=20260916b" />
     <script src="site.js" defer></script>
   </head>
   <body id="jc-museum">
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="jc-page">
-      <header class="jc-nav">
-        <span class="jc-label">João Henrique Campagnolo<br />Neuroscience · Computation</span>
-        <nav aria-label="Portfolio">
-          <a href="#work">Work</a><a href="#publications">Publications</a
-          ><a href="#projects">Independent projects</a><a href="#about">About</a
-          ><button class="theme-toggle" type="button" aria-label="Change colour theme">
-            Light / dark
-          </button>
+      <header class="jc-header">
+        <nav class="jc-top-contacts" aria-label="Contact and profiles at the top">
+          <a href="mailto:jhc2309@gmail.com">Email ↗</a>
+          <a href="https://github.com/JoaoCampagnolo" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://www.linkedin.com/in/joao-campagnolo/" target="_blank" rel="noopener"
+            >LinkedIn ↗</a
+          >
+          <a href="https://orcid.org/0000-0001-9748-5988" target="_blank" rel="noopener">ORCID ↗</a>
         </nav>
+        <div class="jc-nav">
+          <span class="jc-label">João Henrique Campagnolo<br />Neuroscience · Computation</span>
+          <nav aria-label="Portfolio">
+            <a href="#work">Work</a><a href="#publications">Publications</a
+            ><a href="#about">Background</a><a href="#projects">Independent projects</a
+            ><button class="theme-toggle" type="button" aria-label="Change colour theme">
+              Light / dark
+            </button>
+          </nav>
+        </div>
       </header>
       <main id="main">
         <section id="top">
-          <h1 class="jc-name">João<span>Campagnolo.</span></h1>
+          <h1 class="jc-name" aria-label="João Campagnolo">
+            <span class="jc-name-word" aria-hidden="true"
+              ><span class="jc-letter">J</span><span class="jc-letter">O</span
+              ><span class="jc-letter">Ã</span><span class="jc-letter">O</span></span
+            ><span class="jc-name-word" aria-hidden="true"
+              ><span class="jc-letter">C</span><span class="jc-letter">A</span
+              ><span class="jc-letter">M</span><span class="jc-letter">P</span
+              ><span class="jc-letter">A</span><span class="jc-letter">G</span
+              ><span class="jc-letter">N</span><span class="jc-letter">O</span
+              ><span class="jc-letter">L</span><span class="jc-letter">O</span></span
+            >
+          </h1>
           <div class="jc-intro">
             <div class="jc-label">
               Research, tools<br />&amp; other curiosities.<br /><br />Selected work<br />Personal
@@ -61,7 +82,7 @@
         <section class="jc-section" id="work">
           <div class="jc-sectionhead">
             <h2>Selected work</h2>
-            <span class="jc-label">01—04 / Research &amp; teaching</span>
+            <span class="jc-label">01–04 / Research &amp; teaching</span>
           </div>
           <a class="jc-work" href="projects/phd.html" target="_blank" rel="noopener"
             ><span class="jc-index">01</span
@@ -134,39 +155,10 @@
             </div>
           </article>
         </section>
-        <section class="jc-section" id="projects">
-          <div class="jc-sectionhead">
-            <h2>Independent projects</h2>
-            <span class="jc-label">Collections &amp; communities</span>
-          </div>
-          <div class="jc-projects">
-            <a
-              class="jc-project"
-              href="https://panumateket.pogagnolo.chatgpt.site/"
-              target="_blank"
-              rel="noopener"
-              ><div class="jc-project-art jc-panum-art"><span>PANUMATEKET</span></div>
-              <div class="jc-project-title">Panumateket <span>↗</span></div>
-              <p>A film-night ballot and screening archive.<br />Cinema, chosen together.</p></a
-            >
-            <a class="jc-project" href="https://jitterpedia.pogagnolo.chatgpt.site/"
-              ><div class="jc-project-art jc-jitter-art">
-                <img src="images/jitterpedia-wordmark.png" alt="Jitterpedia" loading="lazy" />
-              </div>
-              <span class="jc-project-title">Jitterpedia <span>→</span></span>
-              <p>
-                A collective catalogue of energy drinks.<br />Personal taste, carefully recorded.
-              </p></a
-            >
-          </div>
-        </section>
         <section class="jc-section about-grid" id="about">
           <div>
             <span class="jc-label">Background</span>
             <h2>Between experiment<br />&amp; computation.</h2>
-            <p style="color: var(--quiet); margin-top: 28px">
-              Also: cinema, cycling, football,<br />history, and tennis.
-            </p>
           </div>
           <div class="prose">
             <p>
@@ -199,10 +191,37 @@
             <p>
               I am particularly interested in computational and systems neuroscience, active
               inference, and machine learning methods applied to biological and biomedical data. I
-              also enjoy independent projects that sit slightly outside my formal research path
-              &mdash; from clinical-trial NLP work such as PillProphet to smaller side projects that
-              are somewhere between useful, curious, and unnecessarily committed.
+              also enjoy independent projects that sit slightly outside my formal research path,
+              from clinical-trial NLP work such as PillProphet to smaller side projects that are
+              somewhere between useful, curious, and unnecessarily committed.
             </p>
+            <p class="jc-interests">Also: cinema, cycling, football, history, and tennis.</p>
+          </div>
+        </section>
+        <section class="jc-section" id="projects">
+          <div class="jc-sectionhead">
+            <h2>Independent projects</h2>
+            <span class="jc-label">Collections &amp; communities</span>
+          </div>
+          <div class="jc-projects">
+            <a
+              class="jc-project"
+              href="https://panumateket.pogagnolo.chatgpt.site/"
+              target="_blank"
+              rel="noopener"
+              ><div class="jc-project-art jc-panum-art"><span>PANUMATEKET</span></div>
+              <div class="jc-project-title">Panumateket <span>↗</span></div>
+              <p>A film-night ballot and screening archive.<br />Cinema, chosen together.</p></a
+            >
+            <a class="jc-project" href="https://jitterpedia.pogagnolo.chatgpt.site/"
+              ><div class="jc-project-art jc-jitter-art">
+                <img src="images/jitterpedia-wordmark.png" alt="Jitterpedia" loading="lazy" />
+              </div>
+              <span class="jc-project-title">Jitterpedia <span>→</span></span>
+              <p>
+                A collective catalogue of energy drinks.<br />Personal taste, carefully recorded.
+              </p></a
+            >
           </div>
         </section>
       </main>
